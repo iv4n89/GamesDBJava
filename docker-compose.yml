@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:10.6.4-focal
+    environment:
+      - MYSQL_DATABASE=GamesDB
+      - MYSQL_ROOT_PASSWORD=secr3t!
+    restart: always
+    container_name: db
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - ./db:/var/lib/mysql
+
