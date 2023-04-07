@@ -2,6 +2,7 @@ package com.orejita.games.DTO.Games;
 
 import java.io.Serializable;
 
+import com.orejita.games.DTO.Common.IconDto;
 import com.orejita.games.DTO.Requests.OnCreate;
 import com.orejita.games.DTO.Requests.OnUpdate;
 
@@ -33,6 +34,10 @@ public class GameDto implements Serializable {
     
     @NotNull(groups = OnCreate.class)
     private PublisherDto publisherId;
+
+    private IconDto icon;
+
+    private String logo;
 
     public void setDeveloperId(DeveloperDto developer) {
         this.developerId = developer;

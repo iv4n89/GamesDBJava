@@ -4,15 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.orejita.games.DTO.Manufacturers.ManufacturerDto;
+import com.orejita.games.DTO.Common.IconDto;
 import com.orejita.games.DTO.Requests.OnCreate;
 import com.orejita.games.DTO.Requests.OnUpdate;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ConsoleDto implements Serializable {
     
     
@@ -38,5 +44,13 @@ public class ConsoleDto implements Serializable {
     private Date retirementDate;
 
     private List<String> otherNames;
+
+    private IconDto icon;
+
+    private String logo;
+
+    private List<String> images;
+
+    private List<String> boxImages;
 
 }

@@ -1,11 +1,11 @@
 package com.orejita.games.Entities.Consoles;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.orejita.games.Entities.Common.GenericPrice;
 import com.orejita.games.Entities.Common.Icon;
-import com.orejita.games.Entities.Common.Image;
 import com.orejita.games.Entities.Common.Price;
 import com.orejita.games.Entities.Games.Game;
 import com.orejita.games.Entities.Manufacturer.Manufacturer;
@@ -20,10 +20,13 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "consoles")
-@Data
+@Getter
+@Setter
 public class Console {
 
     @Id
@@ -36,16 +39,9 @@ public class Console {
     private Date launchDate;
     private Date retirementDate;
     private List<String> otherNames;
-
-    @OneToOne(optional = true)
-    @JoinColumn(name = "image_id")
-    private Image logo;
-
-    @OneToMany(mappedBy = "consoleImage", orphanRemoval = true)
-    private List<Image> images;
-
-    @OneToMany(mappedBy = "consoleBoxImage", orphanRemoval = true)
-    private List<Image> boxImages;
+    private String logo;
+    private List<String> images;
+    private List<String> boxImages;
 
     @OneToOne(mappedBy = "consoleInitialPrice")
     private GenericPrice initialPrice;
@@ -62,5 +58,21 @@ public class Console {
 
     @OneToMany(mappedBy = "console")
     private List<Game> games;
+
+    public List<String> getImages() {
+        if (this.images == null) {
+            this.images = new ArrayList<>();
+        }
+
+        return this.images;
+    }
+
+    public List<String> getBoxImages() {
+        if (this.boxImages == null) {
+            this.boxImages = new ArrayList<>();
+        }
+
+        return this.boxImages;
+    }
     
 }

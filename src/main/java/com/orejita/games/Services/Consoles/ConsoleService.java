@@ -1,6 +1,7 @@
 package com.orejita.games.Services.Consoles;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,6 +65,17 @@ public class ConsoleService implements IConsoleService {
         }
         if (console.getOtherNames() != null) {
             _console.setOtherNames(console.getOtherNames());
+        }
+        if (console.getLogo() != null) {
+            _console.setLogo(console.getLogo());
+        }
+        if (console.getImages() != null) {
+            _console.getImages().addAll(console.getImages());
+            _console.setImages(_console.getImages().stream().collect(Collectors.toSet()).stream().toList());
+        }
+        if (console.getBoxImages() != null) {
+            _console.getBoxImages().addAll(console.getBoxImages());
+            _console.setBoxImages(_console.getBoxImages().stream().collect(Collectors.toSet()).stream().toList());
         }
 
         return dao.save(_console);

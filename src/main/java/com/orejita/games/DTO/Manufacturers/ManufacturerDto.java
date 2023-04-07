@@ -1,10 +1,6 @@
 package com.orejita.games.DTO.Manufacturers;
 
-import java.io.Serializable;
-import java.util.List;
-
 import com.orejita.games.DTO.Common.IconDto;
-import com.orejita.games.DTO.Consoles.ConsoleDto;
 import com.orejita.games.DTO.Requests.OnCreate;
 import com.orejita.games.DTO.Requests.OnUpdate;
 
@@ -28,5 +24,7 @@ public class ManufacturerDto {
     private String history;
 
     private IconDto icon;
+
+    private String logo;
 
 }

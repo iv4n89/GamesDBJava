@@ -3,7 +3,6 @@ package com.orejita.games.Entities.Manufacturer;
 import java.util.List;
 
 import com.orejita.games.Entities.Common.Icon;
-import com.orejita.games.Entities.Common.Image;
 import com.orejita.games.Entities.Consoles.Console;
 import com.orejita.games.Entities.Games.Game;
 
@@ -28,8 +27,7 @@ public class Manufacturer {
     private String slug;
     private String history;
     
-    @OneToOne(mappedBy = "manufacturerLogo")
-    private Image logo;
+    private String logo;
 
     @OneToOne(mappedBy = "manufacturerIcon")
     private Icon icon;
