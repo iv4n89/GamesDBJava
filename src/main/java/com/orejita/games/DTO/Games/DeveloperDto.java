@@ -26,4 +26,6 @@ public class DeveloperDto {
     @Size(min = 1, max = 10, groups = { OnCreate.class, OnUpdate.class })
     private String slug;
 
+    private String logo;
+
 }

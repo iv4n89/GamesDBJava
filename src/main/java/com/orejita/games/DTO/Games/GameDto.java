@@ -1,6 +1,7 @@
 package com.orejita.games.DTO.Games;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.orejita.games.DTO.Common.IconDto;
 import com.orejita.games.DTO.Requests.OnCreate;
@@ -38,6 +39,10 @@ public class GameDto implements Serializable {
     private IconDto icon;
 
     private String logo;
+
+    private List<String> images;
+
+    private List<String> boxImages;
 
     public void setDeveloperId(DeveloperDto developer) {
         this.developerId = developer;

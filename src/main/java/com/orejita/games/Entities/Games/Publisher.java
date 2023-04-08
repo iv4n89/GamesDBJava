@@ -23,6 +23,7 @@ public class Publisher {
 
     private String name;
     private String slug;
+    private String logo;
 
     @OneToMany(mappedBy = "publisherId")
     private List<Game> games;

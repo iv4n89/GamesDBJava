@@ -23,6 +23,7 @@ public class Developer {
 
     private String name;
     private String slug;
+    private String logo;
 
     @OneToMany(mappedBy = "developerId")
     private List<Game> games;

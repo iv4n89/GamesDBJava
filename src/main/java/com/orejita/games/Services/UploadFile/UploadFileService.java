@@ -78,4 +78,13 @@ public class UploadFileService {
         }
     }
 
+    public void deleteFile(String fileName) {
+        try {
+            Path filePath = Paths.get(uploadDir).toAbsolutePath().resolve(fileName).normalize();
+            Files.deleteIfExists(filePath);
+        } catch (IOException ex) {
+            throw new MyFileNotFoundException("File to download not found", ex);
+        }
+    }
+
 }

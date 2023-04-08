@@ -82,6 +82,48 @@ public class GameService implements IGameService {
     }
 
     @Override
+    public Game setGameImages(int gameId, List<String> images) {
+        Game game = this.getOneGame(gameId);
+        game.setImages(images);
+        return dao.save(game);
+    }
+
+    @Override
+    public Game setGameImages(Game game, List<String> images) {
+        game.setImages(images);
+        return dao.save(game);
+    }
+
+    @Override
+    public Game setGameBoxImages(int gameId, List<String> images) {
+        Game game = this.getOneGame(gameId);
+        game.setBoxImages(images);
+        return dao.save(game);
+    }
+
+    @Override
+    public Game setGameBoxImages(Game game, List<String> images) {
+        game.setBoxImages(images);
+        return dao.save(game);
+    }
+
+    @Override
+    public Game deleteGameImage(int gameId, String image) {
+        Game game = this.getOneGame(gameId);
+        List<String> images = game.getImages().stream().filter(img -> !img.contains(image)).toList();
+        game.setImages(images);
+        return dao.save(game);
+    }
+
+    @Override
+    public Game deleteGameBoxImage(int gameId, String image) {
+        Game game = this.getOneGame(gameId);
+        List<String> images = game.getBoxImages().stream().filter(img -> !img.contains(image)).toList();
+        game.setBoxImages(images);
+        return dao.save(game);
+    }
+
+    @Override
     public void deleteGame(int id) {
         dao.deleteById(id);
     }

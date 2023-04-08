@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 /db
 /Uploads
+/Uploads/**
 
 ### STS ###
 .apt_generated

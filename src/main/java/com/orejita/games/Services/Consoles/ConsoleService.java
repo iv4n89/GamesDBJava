@@ -70,8 +70,10 @@ public class ConsoleService implements IConsoleService {
             _console.setLogo(console.getLogo());
         }
         if (console.getImages() != null) {
-            _console.getImages().addAll(console.getImages());
-            _console.setImages(_console.getImages().stream().collect(Collectors.toSet()).stream().toList());
+            List<String> newImages = console.getImages();
+            newImages.addAll(_console.getImages());
+            List<String> noDuplicated = newImages.stream().collect(Collectors.toSet()).stream().toList();
+            _console.setImages(noDuplicated);
         }
         if (console.getBoxImages() != null) {
             _console.getBoxImages().addAll(console.getBoxImages());
@@ -79,6 +81,48 @@ public class ConsoleService implements IConsoleService {
         }
 
         return dao.save(_console);
+    }
+
+    @Override
+    public Console setConsoleImages(int consoleId, List<String> images) {
+        Console console = this.getOneConsole(consoleId);
+        console.setImages(images);
+        return dao.save(console);
+    }
+
+    @Override
+    public Console setConsoleImages(Console console, List<String> images) {
+        console.setImages(images);
+        return dao.save(console);
+    }
+
+    @Override
+    public Console setConsoleBoxImages(int consoleId, List<String> boxImages) {
+        Console console = this.getOneConsole(consoleId);
+        console.setBoxImages(boxImages);
+        return dao.save(console);
+    }
+
+    @Override
+    public Console setConsoleBoxImages(Console console, List<String> boxImages) {
+        console.setBoxImages(boxImages);
+        return dao.save(console);
+    }
+
+    @Override
+    public Console deleteConsoleImage(int consoleId, String fileName) {
+        Console console = this.getOneConsole(consoleId);
+        List<String> images = console.getImages().stream().filter(img -> !img.contains(fileName)).toList();
+        console.setImages(images);
+        return dao.save(console);
+    }
+
+    @Override
+    public Console deleteConsoleBoxImage(int consoleId, String fileName) {
+        Console console = this.getOneConsole(consoleId);
+        List<String> images = console.getBoxImages().stream().filter(img -> !img.contains(fileName)).toList();
+        console.setBoxImages(images);
+        return dao.save(console);
     }
 
     @Override
