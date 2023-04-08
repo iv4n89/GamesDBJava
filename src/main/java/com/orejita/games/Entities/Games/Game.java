@@ -3,17 +3,19 @@ package com.orejita.games.Entities.Games;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.orejita.games.Entities.Common.GenericPrice;
 import com.orejita.games.Entities.Common.Icon;
 import com.orejita.games.Entities.Common.Price;
 import com.orejita.games.Entities.Consoles.Console;
 import com.orejita.games.Entities.Manufacturer.Manufacturer;
+import com.orejita.games.Entities.User.Collection;
+import com.orejita.games.Entities.User.UserGameStatic;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -29,8 +31,7 @@ import lombok.Setter;
 public class Game {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private String name;
     private String slug;
     private String description;
@@ -44,7 +45,7 @@ public class Game {
     private Console console;
 
     @OneToOne(mappedBy = "gameInitialPrice")
-    private GenericPrice initialPrice;
+    private Price initialPrice;
 
     @OneToMany(mappedBy = "gameHistoryPrice")
     private List<Price> historyPrices;
@@ -65,6 +66,12 @@ public class Game {
     @ManyToOne
     @JoinColumn(name = "publisher_id")
     private Publisher publisherId;
+
+    @ManyToMany
+    private List<Collection> collections;
+
+    @OneToMany(mappedBy = "game")
+    private List<UserGameStatic> userGameStatics;
 
     public List<String> getImages() {
         if (this.images == null) {

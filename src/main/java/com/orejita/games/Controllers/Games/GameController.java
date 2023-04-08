@@ -50,7 +50,7 @@ public class GameController {
 
     @GetMapping("/console/{id}")
     @ResponseBody
-    public List<GameDto> getAllConsoleGames(@PathVariable("id") int id) {
+    public List<GameDto> getAllConsoleGames(@PathVariable("id") long id) {
         List<Game> games = service.getAllGamesByConsole(id);
         return games.stream()
                 .map(this::convertToDto)
@@ -59,7 +59,7 @@ public class GameController {
 
     @GetMapping("/manufacturer/{id}")
     @ResponseBody
-    public List<GameDto> getAllManufacturerGames(@PathVariable("id") int id) {
+    public List<GameDto> getAllManufacturerGames(@PathVariable("id") long id) {
         List<Game> games = service.getAllGamesByManufacturer(id);
         return games.stream()
                 .map(this::convertToDto)
@@ -68,7 +68,7 @@ public class GameController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public GameDto getGame(@PathVariable("id") int id) {
+    public GameDto getGame(@PathVariable("id") long id) {
         Game game = service.getOneGame(id);
         return convertToDto(game);
     }
@@ -90,7 +90,7 @@ public class GameController {
     @PostMapping("/console/{consoleId}")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public GameDto createGame(@Validated(OnCreate.class) @RequestBody GameDto game, @PathVariable("consoleId") int consoleId) throws ParseException {
+    public GameDto createGame(@Validated(OnCreate.class) @RequestBody GameDto game, @PathVariable("consoleId") long consoleId) throws ParseException {
         Game gameEntity = convertToEntity(game);
         Game _game = service.createGame(consoleId, gameEntity);
         return convertToDto(service.getOneGame(_game.getId()));
@@ -98,14 +98,14 @@ public class GameController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public GameDto updateGame(@PathVariable("id") int id, @Validated(OnUpdate.class) @RequestBody Game game) {
+    public GameDto updateGame(@PathVariable("id") long id, @Validated(OnUpdate.class) @RequestBody Game game) {
         Game _game = service.updateGame(id, game);
         return convertToDto(_game);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteGame(@PathVariable("id") int id) {
+    public void deleteGame(@PathVariable("id") long id) {
         service.deleteGame(id);
     }
 

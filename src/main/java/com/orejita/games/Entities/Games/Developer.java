@@ -18,8 +18,7 @@ import lombok.Setter;
 public class Developer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String name;
     private String slug;

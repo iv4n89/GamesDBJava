@@ -10,19 +10,19 @@ import com.orejita.games.Entities.Games.Game;
 public interface IGameService {
 
     List<Game> getAllGames();
-    List<Game> getAllGamesByConsole(int consoleId);
-    List<Game> getAllGamesByManufacturer(int manufacturerId);
-    Game getOneGame(int gameId);
+    List<Game> getAllGamesByConsole(long consoleId);
+    List<Game> getAllGamesByManufacturer(long manufacturerId);
+    Game getOneGame(long gameId);
     Game getGameByName(String name);
     Game getGameBySlug(String slug);
-    Game createGame(int consoleId, Game game);
-    Game updateGame(int id, Game game);
-    Game setGameImages(int gameId, List<String> images);
+    Game createGame(long consoleId, Game game);
+    Game updateGame(long id, Game game);
+    Game setGameImages(long gameId, List<String> images);
     Game setGameImages(Game game, List<String> images);
-    Game setGameBoxImages(int gameId, List<String> images);
+    Game setGameBoxImages(long gameId, List<String> images);
     Game setGameBoxImages(Game game, List<String> images);
-    Game deleteGameImage(int gameId, String image);
-    Game deleteGameBoxImage(int gameId, String image);
-    void deleteGame(int id);
+    Game deleteGameImage(long gameId, String image);
+    Game deleteGameBoxImage(long gameId, String image);
+    void deleteGame(long id);
     
 }

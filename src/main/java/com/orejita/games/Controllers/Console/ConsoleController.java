@@ -37,9 +37,6 @@ public class ConsoleController {
     private IConsoleService service;
 
     @Autowired
-    private IManufacturerService manufacturerService;
-
-    @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping
@@ -53,7 +50,7 @@ public class ConsoleController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public ConsoleDto getConsole(@PathVariable("id") int id) {
+    public ConsoleDto getConsole(@PathVariable("id") long id) {
         Console console = service.getOneConsole(id);
         return convertToDto(console);
     }
@@ -61,7 +58,7 @@ public class ConsoleController {
     @PostMapping("/manufacturer/{manId}")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public ConsoleDto createConsole(@Validated(OnCreate.class) @RequestBody ConsoleDto console, @PathVariable("manId") int manId) throws ParseException {
+    public ConsoleDto createConsole(@Validated(OnCreate.class) @RequestBody ConsoleDto console, @PathVariable("manId") long manId) throws ParseException {
         Console consoleEntity = convertToEntity(console);
         Console _console = service.createConsole(manId, consoleEntity);
         return convertToDto(_console);
@@ -69,7 +66,7 @@ public class ConsoleController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ConsoleDto updateConsole(@PathVariable("id") int id, @Validated(OnUpdate.class)  @RequestBody ConsoleDto console) throws ParseException {
+    public ConsoleDto updateConsole(@PathVariable("id") long id, @Validated(OnUpdate.class)  @RequestBody ConsoleDto console) throws ParseException {
         Console consoleEntity = convertToEntity(console);
         Console _console = service.updateConsole(consoleEntity, id);
         return convertToDto(_console);
@@ -77,7 +74,7 @@ public class ConsoleController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteConsole(@PathVariable("id") int id) {
+    public void deleteConsole(@PathVariable("id") long id) {
         service.deleteConsole(id);
     }
 

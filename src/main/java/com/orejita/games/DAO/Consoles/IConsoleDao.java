@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.orejita.games.Entities.Consoles.Console;
 
 @Repository
-public interface IConsoleDao extends JpaRepository<Console, Integer> {
+public interface IConsoleDao extends JpaRepository<Console, Long> {
     
 }

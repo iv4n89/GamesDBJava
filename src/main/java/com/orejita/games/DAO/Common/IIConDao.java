@@ -14,20 +14,20 @@ import com.orejita.games.Entities.Games.Game;
 import com.orejita.games.Entities.Manufacturer.Manufacturer;
 
 @Repository
-public interface IIConDao extends JpaRepository<Icon, Integer> {
+public interface IIConDao extends JpaRepository<Icon, Long> {
 
-    Optional<Icon> findByConsoleIconId(Integer consoleId);
+    Optional<Icon> findByConsoleIconId(Long consoleId);
     Optional<Icon> findByConsoleIcon(Console consoleIcon);
-    Optional<Icon> findByManufacturerIconId(Integer manufacturerId);
+    Optional<Icon> findByManufacturerIconId(Long manufacturerId);
     Optional<Icon> findByManufacturerIcon(Manufacturer manufacturerIcon);
-    Optional<Icon> findByGameIconId(Integer gameId);
+    Optional<Icon> findByGameIconId(Long gameId);
     Optional<Icon> findByGameIcon(Game gameIcon);
 
     @Modifying
     @Query("delete from Icon i where i.gameIcon.id = :gameIcon")
-    void deleteByGameIcon(@Param("gameIcon") Integer gameIcon);
+    void deleteByGameIcon(@Param("gameIcon") Long gameIcon);
 
-    void deleteAllByManufacturerIconId(Integer manufacturerId);
-    void deleteAllByConsoleIconId(Integer consoleId);
+    void deleteAllByManufacturerIconId(Long manufacturerId);
+    void deleteAllByConsoleIconId(Long consoleId);
 
 }

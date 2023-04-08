@@ -26,32 +26,32 @@ public class PriceService implements IPriceService {
     private IGameDao gameDao;
 
     @Override
-    public List<Price> getAllPricesByConsole(int consoleId) {
+    public List<Price> getAllPricesByConsole(long consoleId) {
         return dao.findByConsoleHistoryPrice(consoleId);
     }
 
     @Override
-    public List<Price> getAllPricesByGame(int gameId) {
+    public List<Price> getAllPricesByGame(long gameId) {
         return dao.findByGameHistoryPrice(gameId);
     }
 
     @Override
-    public Price getOnePrice(int price) {
+    public Price getOnePrice(long price) {
         return dao.findById(price).orElse(null);
     }
 
     @Override
-    public Price getLastConsolePrice(int consoleId) {
+    public Price getLastConsolePrice(long consoleId) {
         return dao.findFirstByConsoleHistoryPriceOrderById(consoleId);
     }
 
     @Override
-    public Price getLastGamePrice(int gameId) {
+    public Price getLastGamePrice(long gameId) {
         return dao.findFirstByGameHistoryPriceOrderById(gameId);
     }
 
     @Override
-    public Price createPriceForConsole(Price price, int consoleId) {
+    public Price createPriceForConsole(Price price, long consoleId) {
         Console console = consoleDao.findById(consoleId).orElse(null);
 
         if (console == null) {
@@ -64,7 +64,7 @@ public class PriceService implements IPriceService {
     }
 
     @Override
-    public Price createPriceForGame(Price price, int gameId) {
+    public Price createPriceForGame(Price price, long gameId) {
         Game game = gameDao.findById(gameId).orElse(null);
 
         if (game == null) {
@@ -76,7 +76,7 @@ public class PriceService implements IPriceService {
     }
 
     @Override
-    public Price updatePrice(int priceId, Price price) {
+    public Price updatePrice(long priceId, Price price) {
         Price _price = this.getOnePrice(priceId);
 
         if (_price == null) {
@@ -94,7 +94,7 @@ public class PriceService implements IPriceService {
     }
 
     @Override
-    public void deletePrice(int price) {
+    public void deletePrice(long price) {
         dao.deleteById(price);
     }
 

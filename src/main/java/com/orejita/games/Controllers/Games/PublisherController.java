@@ -46,7 +46,7 @@ public class PublisherController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public PublisherDto getPublisher(@PathVariable("id") int id) {
+    public PublisherDto getPublisher(@PathVariable("id") long id) {
         Publisher publisher = service.getOnePublisher(id);
         return convertToDto(publisher);
     }
@@ -62,7 +62,7 @@ public class PublisherController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public PublisherDto updatePublisher(@PathVariable("id") int id, @Validated(OnUpdate.class) @RequestBody PublisherDto publisher) {
+    public PublisherDto updatePublisher(@PathVariable("id") long id, @Validated(OnUpdate.class) @RequestBody PublisherDto publisher) {
         Publisher publisherEntity = convertToEntity(publisher);
         Publisher _publisher = service.updatePublisher(id, publisherEntity);
         return convertToDto(_publisher);
@@ -70,7 +70,7 @@ public class PublisherController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePublisher(@PathVariable("id") int id) {
+    public void deletePublisher(@PathVariable("id") long id) {
         service.deletePublisher(id);
     }
 

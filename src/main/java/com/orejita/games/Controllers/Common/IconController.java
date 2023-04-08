@@ -52,28 +52,28 @@ public class IconController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public IconDto getIconById(@PathVariable("id") int id) {
+    public IconDto getIconById(@PathVariable("id") long id) {
         Icon icon = service.getIconById(id);
         return convertToDto(icon);
     }
 
     @GetMapping("/console/{consoleId}")
     @ResponseBody
-    public IconDto getIconByConsoleId(@PathVariable("consoleId") int consoleId) {
+    public IconDto getIconByConsoleId(@PathVariable("consoleId") long consoleId) {
         Icon icon = service.getIconByConsoleId(consoleId);
         return convertToDto(icon);
     }
 
     @GetMapping("/manufacturer/{manufacturerId}")
     @ResponseBody
-    public IconDto getIconByManufacturerId(@PathVariable("manufacturerId") int manufacturerId) {
+    public IconDto getIconByManufacturerId(@PathVariable("manufacturerId") long manufacturerId) {
         Icon icon = service.getIconByManufacturerId(manufacturerId);
         return convertToDto(icon);
     }
 
     @GetMapping("/game/{gameId}")
     @ResponseBody
-    public IconDto getIconByGameId(@PathVariable("gameId") int gameId) {
+    public IconDto getIconByGameId(@PathVariable("gameId") long gameId) {
         Icon icon = service.getIconByGameId(gameId);
         return convertToDto(icon);
     }
@@ -81,7 +81,7 @@ public class IconController {
     @PostMapping("/game/{gameId}")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public IconDto createIconByGameId(@PathVariable("gameId") int gameId, @Validated(OnCreate.class) @RequestBody IconDto icon) {
+    public IconDto createIconByGameId(@PathVariable("gameId") long gameId, @Validated(OnCreate.class) @RequestBody IconDto icon) {
         Icon iconEntity = convertToEntity(icon);
         Icon _icon = service.createIconByGameId(gameId, iconEntity);
         return convertToDto(_icon);
@@ -90,7 +90,7 @@ public class IconController {
     @PostMapping("/console/{consoleId}")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public IconDto createIconByConsoleId(@PathVariable("consoleId") int consoleId, @Validated(OnCreate.class) @RequestBody IconDto icon) {
+    public IconDto createIconByConsoleId(@PathVariable("consoleId") long consoleId, @Validated(OnCreate.class) @RequestBody IconDto icon) {
         Icon iconEntity = convertToEntity(icon);
         Icon _icon = service.createIconByConsoleId(consoleId, iconEntity);
         return convertToDto(_icon);
@@ -99,7 +99,7 @@ public class IconController {
     @PostMapping("/manufacturer/{manufacturerId}")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public IconDto createIconByManufacturerId(@PathVariable("manufacturerId") int manufacturerId, @Validated(OnCreate.class) @RequestBody IconDto icon) {
+    public IconDto createIconByManufacturerId(@PathVariable("manufacturerId") long manufacturerId, @Validated(OnCreate.class) @RequestBody IconDto icon) {
         Icon iconEntity = convertToEntity(icon);
         Icon _icon = service.createIconByManufacturerId(manufacturerId, iconEntity);
         return convertToDto(_icon);
@@ -107,7 +107,7 @@ public class IconController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public IconDto updateIcon(@PathVariable("id") int id, @Validated(OnUpdate.class) @RequestBody IconDto icon) {
+    public IconDto updateIcon(@PathVariable("id") long id, @Validated(OnUpdate.class) @RequestBody IconDto icon) {
         Icon iconEntity = convertToEntity(icon);
         Icon _icon = service.updateIcon(id, iconEntity);
         return convertToDto(_icon);
@@ -115,7 +115,7 @@ public class IconController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteIcon(@PathVariable("id") int id) {
+    public void deleteIcon(@PathVariable("id") long id) {
         service.deleteIcon(id);
     }
     

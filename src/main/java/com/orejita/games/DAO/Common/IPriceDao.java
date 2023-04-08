@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import com.orejita.games.Entities.Common.Price;
 
 @Repository
-public interface IPriceDao extends JpaRepository<Price, Integer> {
+public interface IPriceDao extends JpaRepository<Price, Long> {
 
-    List<Price> findByConsoleHistoryPrice(Integer consoleId);
-    List<Price> findByGameHistoryPrice(Integer gameId);
-    Price findFirstByConsoleHistoryPriceOrderById(Integer consoleId);
-    Price findFirstByGameHistoryPriceOrderById(Integer gameId);
+    List<Price> findByConsoleHistoryPrice(Long consoleId);
+    List<Price> findByGameHistoryPrice(Long gameId);
+    Price findFirstByConsoleHistoryPriceOrderById(Long consoleId);
+    Price findFirstByGameHistoryPriceOrderById(Long gameId);
     
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.orejita.games.Entities.Games.Developer;
 
 @Repository
-public interface IDeveloperDao extends JpaRepository<Developer, Integer> {
+public interface IDeveloperDao extends JpaRepository<Developer, Long> {
     
 }

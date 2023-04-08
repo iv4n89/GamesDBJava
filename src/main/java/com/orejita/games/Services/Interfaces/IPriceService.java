@@ -6,14 +6,14 @@ import com.orejita.games.Entities.Common.Price;
 
 public interface IPriceService {
 
-    List<Price> getAllPricesByConsole(int consoleId);
-    List<Price> getAllPricesByGame(int gameId);
-    Price getOnePrice(int price);
-    Price getLastConsolePrice(int consoleId);
-    Price getLastGamePrice(int gameId);
-    Price createPriceForConsole(Price price, int consoleId);
-    Price createPriceForGame(Price price, int gameId);
-    Price updatePrice(int priceId, Price price);
-    void deletePrice(int price);
+    List<Price> getAllPricesByConsole(long consoleId);
+    List<Price> getAllPricesByGame(long gameId);
+    Price getOnePrice(long price);
+    Price getLastConsolePrice(long consoleId);
+    Price getLastGamePrice(long gameId);
+    Price createPriceForConsole(Price price, long consoleId);
+    Price createPriceForGame(Price price, long gameId);
+    Price updatePrice(long priceId, Price price);
+    void deletePrice(long price);
     
 }

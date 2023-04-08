@@ -46,7 +46,7 @@ public class DeveloperController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public DeveloperDto getDeveloper(@PathVariable("id") int id) {
+    public DeveloperDto getDeveloper(@PathVariable("id") long id) {
         Developer developer = service.getOneDeveloper(id);
         return convertToDto(developer);
     }
@@ -62,7 +62,7 @@ public class DeveloperController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public DeveloperDto updateDeveloper(@PathVariable("id") int id, @Validated(OnUpdate.class) @RequestBody DeveloperDto developer) {
+    public DeveloperDto updateDeveloper(@PathVariable("id") long id, @Validated(OnUpdate.class) @RequestBody DeveloperDto developer) {
         Developer developerEntity = convertToEntity(developer);
         Developer _developer = service.updateDeveloper(id, developerEntity);
         return convertToDto(_developer);
@@ -70,7 +70,7 @@ public class DeveloperController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteDeveloper(@PathVariable("id") int id)  {
+    public void deleteDeveloper(@PathVariable("id") long id)  {
         service.deleteDeveloper(id);
     }
 

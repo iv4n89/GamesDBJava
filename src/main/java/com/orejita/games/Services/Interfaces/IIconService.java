@@ -10,17 +10,17 @@ import com.orejita.games.Entities.Manufacturer.Manufacturer;
 public interface IIconService {
     
     List<Icon> getAllIcons();
-    Icon getIconById(int id);
-    Icon getIconByConsoleId(int consoleId);
+    Icon getIconById(long id);
+    Icon getIconByConsoleId(long consoleId);
     Icon getIconByConsole(Console console);
-    Icon getIconByManufacturerId(int manufacturerId);
+    Icon getIconByManufacturerId(long manufacturerId);
     Icon getIconByManufacturer(Manufacturer manufacturer);
-    Icon getIconByGameId(int gameId);
+    Icon getIconByGameId(long gameId);
     Icon getIconByGame(Game game);
-    Icon createIconByGameId(int gameId, Icon icon);
-    Icon createIconByManufacturerId(int manufacturerId, Icon icon);
-    Icon createIconByConsoleId(int consoleId, Icon icon);
-    Icon updateIcon(int id, Icon icon);
-    void deleteIcon(int id);
+    Icon createIconByGameId(long gameId, Icon icon);
+    Icon createIconByManufacturerId(long manufacturerId, Icon icon);
+    Icon createIconByConsoleId(long consoleId, Icon icon);
+    Icon updateIcon(long id, Icon icon);
+    void deleteIcon(long id);
 
 }

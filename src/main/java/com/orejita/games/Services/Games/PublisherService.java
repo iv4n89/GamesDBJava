@@ -21,7 +21,7 @@ public class PublisherService implements IPublisherService {
     }
 
     @Override
-    public Publisher getOnePublisher(int id) {
+    public Publisher getOnePublisher(long id) {
         return dao.findById(id).orElse(null);
     }
 
@@ -31,7 +31,7 @@ public class PublisherService implements IPublisherService {
     }
 
     @Override
-    public Publisher updatePublisher(int id, Publisher publisher) {
+    public Publisher updatePublisher(long id, Publisher publisher) {
         Publisher _publisher = this.getOnePublisher(id);
 
         if (_publisher == null) {
@@ -49,7 +49,7 @@ public class PublisherService implements IPublisherService {
     }
 
     @Override
-    public void deletePublisher(int id) {
+    public void deletePublisher(long id) {
         dao.deleteById(id);
     }
 

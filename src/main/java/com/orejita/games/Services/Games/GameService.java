@@ -25,17 +25,17 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public List<Game> getAllGamesByConsole(int consoleId) {
+    public List<Game> getAllGamesByConsole(long consoleId) {
         return dao.findByConsole(consoleId);
     }
 
     @Override
-    public List<Game> getAllGamesByManufacturer(int manufacturerId) {
+    public List<Game> getAllGamesByManufacturer(long manufacturerId) {
         return dao.findByManufacturer(manufacturerId);
     }
 
     @Override
-    public Game getOneGame(int gameId) {
+    public Game getOneGame(long gameId) {
         return dao.findById(gameId).orElse(null);
     }
 
@@ -50,7 +50,7 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public Game createGame(int consoleId, Game game) {
+    public Game createGame(long consoleId, Game game) {
         Console console = consoleDao.findById(consoleId).orElse(null);
 
         if (console == null) {
@@ -61,7 +61,7 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public Game updateGame(int id, Game game) {
+    public Game updateGame(long id, Game game) {
         Game _game = this.getOneGame(id);
 
         if (_game == null) {
@@ -82,7 +82,7 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public Game setGameImages(int gameId, List<String> images) {
+    public Game setGameImages(long gameId, List<String> images) {
         Game game = this.getOneGame(gameId);
         game.setImages(images);
         return dao.save(game);
@@ -95,7 +95,7 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public Game setGameBoxImages(int gameId, List<String> images) {
+    public Game setGameBoxImages(long gameId, List<String> images) {
         Game game = this.getOneGame(gameId);
         game.setBoxImages(images);
         return dao.save(game);
@@ -108,7 +108,7 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public Game deleteGameImage(int gameId, String image) {
+    public Game deleteGameImage(long gameId, String image) {
         Game game = this.getOneGame(gameId);
         List<String> images = game.getImages().stream().filter(img -> !img.contains(image)).toList();
         game.setImages(images);
@@ -116,7 +116,7 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public Game deleteGameBoxImage(int gameId, String image) {
+    public Game deleteGameBoxImage(long gameId, String image) {
         Game game = this.getOneGame(gameId);
         List<String> images = game.getBoxImages().stream().filter(img -> !img.contains(image)).toList();
         game.setBoxImages(images);
@@ -124,7 +124,7 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public void deleteGame(int id) {
+    public void deleteGame(long id) {
         dao.deleteById(id);
     }
     

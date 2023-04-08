@@ -21,7 +21,7 @@ public class ManufacturerService implements IManufacturerService {
     }
 
     @Override
-    public Manufacturer getOneManufacturer(int id) {
+    public Manufacturer getOneManufacturer(long id) {
         return dao.findById(id).orElse(null);
     }
 
@@ -31,7 +31,7 @@ public class ManufacturerService implements IManufacturerService {
     }
 
     @Override
-    public Manufacturer updateManufacturer(int id, Manufacturer manufacturer) {
+    public Manufacturer updateManufacturer(long id, Manufacturer manufacturer) {
         Manufacturer _manufacturer = this.getOneManufacturer(id);
 
         if (_manufacturer == null) {
@@ -52,7 +52,7 @@ public class ManufacturerService implements IManufacturerService {
     }
 
     @Override
-    public void deleteManufacturer(int id) {
+    public void deleteManufacturer(long id) {
         dao.deleteById(id);
     }
     

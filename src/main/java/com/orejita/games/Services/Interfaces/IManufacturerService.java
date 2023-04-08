@@ -6,8 +6,8 @@ import com.orejita.games.Entities.Manufacturer.Manufacturer;
 
 public interface IManufacturerService {
     List<Manufacturer> getAllManufacturers();
-    Manufacturer getOneManufacturer(int id);
+    Manufacturer getOneManufacturer(long id);
     Manufacturer createManufacturer(Manufacturer manufacturer);
-    Manufacturer updateManufacturer(int id, Manufacturer manufacturer);
-    void deleteManufacturer(int id);
+    Manufacturer updateManufacturer(long id, Manufacturer manufacturer);
+    void deleteManufacturer(long id);
 }

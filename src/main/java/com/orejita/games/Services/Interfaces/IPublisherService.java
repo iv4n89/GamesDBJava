@@ -7,12 +7,12 @@ public interface IPublisherService {
 
     List<Publisher> getAllPublishers();
 
-    Publisher getOnePublisher(int id);
+    Publisher getOnePublisher(long id);
 
     Publisher createPublisher(Publisher publisher);
 
-    Publisher updatePublisher(int id, Publisher publisher);
+    Publisher updatePublisher(long id, Publisher publisher);
 
-    void deletePublisher(int id);
+    void deletePublisher(long id);
 
 }

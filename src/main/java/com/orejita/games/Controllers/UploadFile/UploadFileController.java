@@ -123,7 +123,7 @@ public class UploadFileController {
 
     @PostMapping("/console/{id}/logo")
     @ResponseBody
-    public UploadFileResponse uploadConsoleLogo(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
+    public UploadFileResponse uploadConsoleLogo(@PathVariable("id") long id, @RequestParam("file") MultipartFile file) {
 
         String fileName = uploadFileService.storeFile(file, "console-logo");
 
@@ -140,7 +140,7 @@ public class UploadFileController {
 
     @PostMapping("/console/{id}/images")
     @ResponseBody
-    public List<UploadFileResponse> uploadConsoleImages(@PathVariable("id") int id, @RequestParam("files") MultipartFile[] files) {
+    public List<UploadFileResponse> uploadConsoleImages(@PathVariable("id") long id, @RequestParam("files") MultipartFile[] files) {
         Console console = new Console();
         List<UploadFileResponse> uploadedFiles = new ArrayList<>();
 
@@ -158,14 +158,14 @@ public class UploadFileController {
 
     @DeleteMapping("/console/{id}/images/{image:.+}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteConsoleImage(@PathVariable("id") int id, @PathVariable("image") String image) {
+    public void deleteConsoleImage(@PathVariable("id") long id, @PathVariable("image") String image) {
         consoleService.deleteConsoleImage(id, image);
         uploadFileService.deleteFile(image);
     }
 
     @PostMapping("/console/{id}/box-images")
     @ResponseBody
-    public List<UploadFileResponse> uploadConsoleBoxImages(@PathVariable("id") int id, @RequestParam("files") MultipartFile[] files) {
+    public List<UploadFileResponse> uploadConsoleBoxImages(@PathVariable("id") long id, @RequestParam("files") MultipartFile[] files) {
         Console console = new Console();
         List<UploadFileResponse> uploadedFiles = new ArrayList<>();
 
@@ -182,14 +182,14 @@ public class UploadFileController {
 
     @DeleteMapping("/console/{id}/box-images/{image:.+}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteConsoleBoxImage(@PathVariable("id") int id, @PathVariable("image") String image) {
+    public void deleteConsoleBoxImage(@PathVariable("id") long id, @PathVariable("image") String image) {
         consoleService.deleteConsoleBoxImage(id, image);
         uploadFileService.deleteFile(image);
     }
 
     @PostMapping("/console/{id}/icon")
     @ResponseBody
-    public UploadFileResponse uploadConsoleIcon(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
+    public UploadFileResponse uploadConsoleIcon(@PathVariable("id") long id, @RequestParam("file") MultipartFile file) {
         Icon icon = new Icon();
         String fileName = uploadFileService.storeFile(file, "console-icon");
         String fileDownloadUri = this.IMAGE_URI_PART + fileName;
@@ -200,7 +200,7 @@ public class UploadFileController {
 
     @PostMapping("/game/{id}/logo")
     @ResponseBody
-    public UploadFileResponse uploadGameLogo(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
+    public UploadFileResponse uploadGameLogo(@PathVariable("id") long id, @RequestParam("file") MultipartFile file) {
         String fileName = uploadFileService.storeFile(file, "game-logo");
 
         String FileDownloadUri = this.IMAGE_URI_PART + fileName;
@@ -215,7 +215,7 @@ public class UploadFileController {
 
     @PostMapping("/game/{id}/images")
     @ResponseBody
-    public List<UploadFileResponse> uploadGameImages(@PathVariable("id") int id, @RequestParam("files") MultipartFile[] files) {
+    public List<UploadFileResponse> uploadGameImages(@PathVariable("id") long id, @RequestParam("files") MultipartFile[] files) {
         Game game = new Game();
         List<UploadFileResponse> uploadedFiles = new ArrayList<>();
 
@@ -233,14 +233,14 @@ public class UploadFileController {
 
     @DeleteMapping("/game/{id}/images/{image:.+}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteGameImage(@PathVariable("id") int id, @PathVariable("image") String image) {
+    public void deleteGameImage(@PathVariable("id") long id, @PathVariable("image") String image) {
         gameService.deleteGameImage(id, image);
         uploadFileService.deleteFile(image);
     }
 
     @PostMapping("/game/{id}/box-images")
     @ResponseBody
-    public List<UploadFileResponse> uploadGameBoxImages(@PathVariable("id") int id, @RequestParam("files") MultipartFile[] files) {
+    public List<UploadFileResponse> uploadGameBoxImages(@PathVariable("id") long id, @RequestParam("files") MultipartFile[] files) {
         Game game = new Game();
         List<UploadFileResponse> uploadedFiles = new ArrayList<>();
 
@@ -257,14 +257,14 @@ public class UploadFileController {
 
     @DeleteMapping("/game/{id}/box-images/{image:.+}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteGameBoxImage(@PathVariable("id") int id, @PathVariable("image") String image) {
+    public void deleteGameBoxImage(@PathVariable("id") long id, @PathVariable("image") String image) {
         gameService.deleteGameBoxImage(id, image);
         uploadFileService.deleteFile(image);
     }
 
     @PostMapping("/game/{id}/icon")
     @ResponseBody
-    public UploadFileResponse uploadGameIcon(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
+    public UploadFileResponse uploadGameIcon(@PathVariable("id") long id, @RequestParam("file") MultipartFile file) {
         Icon icon = new Icon();
         String fileName = uploadFileService.storeFile(file, "game-icon");
         String fileDownloadUri = this.IMAGE_URI_PART + fileName;
@@ -275,7 +275,7 @@ public class UploadFileController {
 
     @PostMapping("/manufacturer/{id}/logo")
     @ResponseBody
-    public UploadFileResponse uploadManufacturerLogo(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
+    public UploadFileResponse uploadManufacturerLogo(@PathVariable("id") long id, @RequestParam("file") MultipartFile file) {
         Manufacturer manufacturer = new Manufacturer();
         String fileName = uploadFileService.storeFile(file, "manufacturer-logo");
         String fileDownloadUri = this.IMAGE_URI_PART + fileName;
@@ -286,7 +286,7 @@ public class UploadFileController {
 
     @PostMapping("/manufacturer/{id}/icon")
     @ResponseBody
-    public UploadFileResponse uploadManufacturerIcon(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
+    public UploadFileResponse uploadManufacturerIcon(@PathVariable("id") long id, @RequestParam("file") MultipartFile file) {
         Icon icon = new Icon();
         String fileName = uploadFileService.storeFile(file, "manufacturer-icon");
         String fileDownloadUri = this.IMAGE_URI_PART + fileName;
@@ -297,7 +297,7 @@ public class UploadFileController {
 
     @PostMapping("/developer/{id}/logo")
     @ResponseBody
-    public UploadFileResponse uploadDeveloperLogo(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
+    public UploadFileResponse uploadDeveloperLogo(@PathVariable("id") long id, @RequestParam("file") MultipartFile file) {
         Developer developer = new Developer();
         String fileName = uploadFileService.storeFile(file, "developer-logo");
         String fileDownloadUri = this.IMAGE_URI_PART + fileName;
@@ -308,7 +308,7 @@ public class UploadFileController {
 
     @PostMapping("/publisher/{id}/logo")
     @ResponseBody
-    public UploadFileResponse uploadPublisherLogo(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
+    public UploadFileResponse uploadPublisherLogo(@PathVariable("id") long id, @RequestParam("file") MultipartFile file) {
         Publisher publisher = new Publisher();
         String fileName = uploadFileService.storeFile(file, "publisher-logo");
         String fileDownloadUri = this.IMAGE_URI_PART + fileName;

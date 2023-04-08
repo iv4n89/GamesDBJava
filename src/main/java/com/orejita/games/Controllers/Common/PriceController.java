@@ -62,14 +62,14 @@ public class PriceController {
 
     @GetMapping("/last/console/{id}")
     @ResponseBody
-    public PriceDto getLastConsolePrice(@PathVariable("id") int id) {
+    public PriceDto getLastConsolePrice(@PathVariable("id") long id) {
         Price price = service.getLastConsolePrice(id);
         return convertToDto(price);
     }
 
     @GetMapping("/last/game/{id}")
     @ResponseBody
-    public PriceDto getLastGamePrice(@PathVariable("id") int id) {
+    public PriceDto getLastGamePrice(@PathVariable("id") long id) {
         Price price = service.getLastGamePrice(id);
         return convertToDto(price);
     }
@@ -77,7 +77,7 @@ public class PriceController {
     @PostMapping("/console/{id}")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public PriceDto createConsolePrice(@PathVariable("id") int id, @Validated(OnCreate.class) @RequestBody PriceDto price) {
+    public PriceDto createConsolePrice(@PathVariable("id") long id, @Validated(OnCreate.class) @RequestBody PriceDto price) {
         Price priceEntity = convertToEntity(price);
         Price _price = service.createPriceForConsole(priceEntity, id);
         return convertToDto(_price);
@@ -86,7 +86,7 @@ public class PriceController {
     @PostMapping("/game/{id}")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public PriceDto createGamePrice(@PathVariable("id") int id, @Validated(OnCreate.class) @RequestBody PriceDto price) {
+    public PriceDto createGamePrice(@PathVariable("id") long id, @Validated(OnCreate.class) @RequestBody PriceDto price) {
         Price priceEntity = convertToEntity(price);
         Price _price = service.createPriceForGame(priceEntity, id);
         return convertToDto(_price);
@@ -94,7 +94,7 @@ public class PriceController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public PriceDto updatePrice(@PathVariable("id") int id, @Validated(OnUpdate.class) @RequestBody PriceDto price) {
+    public PriceDto updatePrice(@PathVariable("id") long id, @Validated(OnUpdate.class) @RequestBody PriceDto price) {
         Price priceEntity = convertToEntity(price);
         Price _price = service.updatePrice(id, priceEntity);
         return convertToDto(_price);
@@ -102,7 +102,7 @@ public class PriceController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePrice(@PathVariable("id") int id) {
+    public void deletePrice(@PathVariable("id") long id) {
         service.deletePrice(id);
     }
 

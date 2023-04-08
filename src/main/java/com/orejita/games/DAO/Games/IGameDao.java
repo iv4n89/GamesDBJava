@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import com.orejita.games.Entities.Games.Game;
 
 @Repository
-public interface IGameDao extends JpaRepository<Game, Integer> {
+public interface IGameDao extends JpaRepository<Game, Long> {
 
-    List<Game> findByConsole(Integer consoleId);
-    List<Game> findByManufacturer(Integer manufacturerId);
+    List<Game> findByConsole(Long consoleId);
+    List<Game> findByManufacturer(Long manufacturerId);
     Optional<Game> findByName(String name);
     Optional<Game> findBySlug(String slug);
     

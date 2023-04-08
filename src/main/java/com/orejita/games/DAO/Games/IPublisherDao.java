@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.orejita.games.Entities.Games.Publisher;
 
 @Repository
-public interface IPublisherDao extends JpaRepository<Publisher, Integer> {
+public interface IPublisherDao extends JpaRepository<Publisher, Long> {
     
 }

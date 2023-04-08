@@ -7,9 +7,9 @@ import com.orejita.games.Entities.Games.Developer;
 public interface IDeveloperService {
 
     List<Developer> getAllDevelopers();
-    Developer getOneDeveloper(int id);
+    Developer getOneDeveloper(long id);
     Developer createDeveloper(Developer developer);
-    Developer updateDeveloper(int id, Developer developer);
-    void deleteDeveloper(int id);
+    Developer updateDeveloper(long id, Developer developer);
+    void deleteDeveloper(long id);
 
 }

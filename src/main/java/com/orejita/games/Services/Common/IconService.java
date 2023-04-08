@@ -36,12 +36,12 @@ public class IconService implements IIconService {
     }
 
     @Override
-    public Icon getIconById(int id) {
+    public Icon getIconById(long id) {
         return dao.findById(id).orElse(null);
     }
 
     @Override
-    public Icon getIconByConsoleId(int consoleId) {
+    public Icon getIconByConsoleId(long consoleId) {
         return dao.findByConsoleIconId(consoleId).orElse(null);
     }
 
@@ -51,7 +51,7 @@ public class IconService implements IIconService {
     }
 
     @Override
-    public Icon getIconByManufacturerId(int manufacturerId) {
+    public Icon getIconByManufacturerId(long manufacturerId) {
         return dao.findByManufacturerIconId(manufacturerId).orElse(null);
     }
 
@@ -61,7 +61,7 @@ public class IconService implements IIconService {
     }
 
     @Override
-    public Icon getIconByGameId(int gameId) {
+    public Icon getIconByGameId(long gameId) {
         return dao.findByGameIconId(gameId).orElse(null);
     }
 
@@ -71,7 +71,7 @@ public class IconService implements IIconService {
     }
 
     @Override
-    public Icon createIconByGameId(int gameId, Icon icon) {
+    public Icon createIconByGameId(long gameId, Icon icon) {
 
         Icon _icon = this.getIconByGameId(gameId);
 
@@ -86,7 +86,7 @@ public class IconService implements IIconService {
     }
 
     @Override
-    public Icon createIconByConsoleId(int consoleId, Icon icon) {
+    public Icon createIconByConsoleId(long consoleId, Icon icon) {
         Icon _icon = this.getIconByConsoleId(consoleId);
 
         if (_icon != null) {
@@ -100,7 +100,7 @@ public class IconService implements IIconService {
     }
 
     @Override
-    public Icon createIconByManufacturerId(int manufacturerId, Icon icon) {
+    public Icon createIconByManufacturerId(long manufacturerId, Icon icon) {
         Icon _icon = this.getIconByManufacturerId(manufacturerId);
 
         if (_icon != null) {
@@ -114,7 +114,7 @@ public class IconService implements IIconService {
     }
 
     @Override
-    public Icon updateIcon(int id, Icon icon) {
+    public Icon updateIcon(long id, Icon icon) {
         Icon _icon = this.getIconById(id);
 
         if (_icon == null) {
@@ -129,7 +129,7 @@ public class IconService implements IIconService {
     }
 
     @Override
-    public void deleteIcon(int id) {
+    public void deleteIcon(long id) {
         dao.deleteById(id);
     }
 

@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.orejita.games.Entities.Common.GenericPrice;
 import com.orejita.games.Entities.Common.Icon;
 import com.orejita.games.Entities.Common.Price;
 import com.orejita.games.Entities.Games.Game;
 import com.orejita.games.Entities.Manufacturer.Manufacturer;
+import com.orejita.games.Entities.User.Collection;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.GenerationType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,8 +29,7 @@ import lombok.Setter;
 public class Console {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private String name;
     private String slug;
     private String description;
@@ -43,7 +42,7 @@ public class Console {
     private List<String> boxImages;
 
     @OneToOne(mappedBy = "consoleInitialPrice")
-    private GenericPrice initialPrice;
+    private Price initialPrice;
 
     @OneToMany(mappedBy = "consoleHistoryPrice")
     private List<Price> hitoryPrice;
@@ -57,6 +56,9 @@ public class Console {
 
     @OneToMany(mappedBy = "console")
     private List<Game> games;
+
+    @ManyToMany
+    private List<Collection> collections;
 
     public List<String> getImages() {
         if (this.images == null) {

@@ -6,14 +6,14 @@ import com.orejita.games.Entities.Consoles.Console;
 
 public interface IConsoleService {
     List<Console> getAllConsoles();
-    Console getOneConsole(Integer consoleId);
-    Console createConsole(int manufacturerId, Console console);
-    Console updateConsole(Console console, Integer consoleId);
-    Console setConsoleImages(int consoleId, List<String> images);
+    Console getOneConsole(long consoleId);
+    Console createConsole(long manufacturerId, Console console);
+    Console updateConsole(Console console, long consoleId);
+    Console setConsoleImages(long consoleId, List<String> images);
     Console setConsoleImages(Console console, List<String> images);
-    Console setConsoleBoxImages(int consoleId, List<String> boxImages);
+    Console setConsoleBoxImages(long consoleId, List<String> boxImages);
     Console setConsoleBoxImages(Console console, List<String> boxImages);
-    Console deleteConsoleImage(int consoleId, String fileName);
-    Console deleteConsoleBoxImage(int consoleId, String fileName);
-    void deleteConsole(Integer consoleId);
+    Console deleteConsoleImage(long consoleId, String fileName);
+    Console deleteConsoleBoxImage(long consoleId, String fileName);
+    void deleteConsole(long consoleId);
 }

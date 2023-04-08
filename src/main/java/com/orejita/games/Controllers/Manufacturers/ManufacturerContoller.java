@@ -47,7 +47,7 @@ public class ManufacturerContoller {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public ManufacturerDto getManufacturer(@PathVariable("id") int id) {
+    public ManufacturerDto getManufacturer(@PathVariable("id") long id) {
         Manufacturer manufacturer = service.getOneManufacturer(id);
         return convertToDto(manufacturer);
     }
@@ -63,7 +63,7 @@ public class ManufacturerContoller {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ManufacturerDto updateManufacturer(@PathVariable("id") int id, @Validated(OnUpdate.class) @RequestBody ManufacturerDto manufacturer) {
+    public ManufacturerDto updateManufacturer(@PathVariable("id") long id, @Validated(OnUpdate.class) @RequestBody ManufacturerDto manufacturer) {
         Manufacturer manufacturerEntity = convertToEntity(manufacturer);
         Manufacturer _manufacturer = service.updateManufacturer(id, manufacturerEntity);
         return convertToDto(_manufacturer);
@@ -71,7 +71,7 @@ public class ManufacturerContoller {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteManufacturer(@PathVariable("id") int id) {
+    public void deleteManufacturer(@PathVariable("id") long id) {
         service.deleteManufacturer(id);
     }
 

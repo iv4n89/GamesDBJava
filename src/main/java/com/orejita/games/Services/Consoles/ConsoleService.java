@@ -27,12 +27,12 @@ public class ConsoleService implements IConsoleService {
     }
 
     @Override
-    public Console getOneConsole(Integer consoleId) {
+    public Console getOneConsole(long consoleId) {
         return dao.findById(consoleId).orElse(null);
     }
 
     @Override
-    public Console createConsole(int manufacturerId, Console console) {
+    public Console createConsole(long manufacturerId, Console console) {
         Manufacturer manufacturer = manufacturerDao.findById(manufacturerId).orElse(null);
 
         if (manufacturer != null) {
@@ -43,7 +43,7 @@ public class ConsoleService implements IConsoleService {
     }
 
     @Override
-    public Console updateConsole(Console console, Integer consoleId) {
+    public Console updateConsole(Console console, long consoleId) {
         Console _console = this.getOneConsole(consoleId);
         if (console.getName() != null) {
             _console.setName(console.getName());
@@ -84,7 +84,7 @@ public class ConsoleService implements IConsoleService {
     }
 
     @Override
-    public Console setConsoleImages(int consoleId, List<String> images) {
+    public Console setConsoleImages(long consoleId, List<String> images) {
         Console console = this.getOneConsole(consoleId);
         console.setImages(images);
         return dao.save(console);
@@ -97,7 +97,7 @@ public class ConsoleService implements IConsoleService {
     }
 
     @Override
-    public Console setConsoleBoxImages(int consoleId, List<String> boxImages) {
+    public Console setConsoleBoxImages(long consoleId, List<String> boxImages) {
         Console console = this.getOneConsole(consoleId);
         console.setBoxImages(boxImages);
         return dao.save(console);
@@ -110,7 +110,7 @@ public class ConsoleService implements IConsoleService {
     }
 
     @Override
-    public Console deleteConsoleImage(int consoleId, String fileName) {
+    public Console deleteConsoleImage(long consoleId, String fileName) {
         Console console = this.getOneConsole(consoleId);
         List<String> images = console.getImages().stream().filter(img -> !img.contains(fileName)).toList();
         console.setImages(images);
@@ -118,7 +118,7 @@ public class ConsoleService implements IConsoleService {
     }
 
     @Override
-    public Console deleteConsoleBoxImage(int consoleId, String fileName) {
+    public Console deleteConsoleBoxImage(long consoleId, String fileName) {
         Console console = this.getOneConsole(consoleId);
         List<String> images = console.getBoxImages().stream().filter(img -> !img.contains(fileName)).toList();
         console.setBoxImages(images);
@@ -126,7 +126,7 @@ public class ConsoleService implements IConsoleService {
     }
 
     @Override
-    public void deleteConsole(Integer consoleId) {
+    public void deleteConsole(long consoleId) {
         dao.deleteById(consoleId);
     }
 

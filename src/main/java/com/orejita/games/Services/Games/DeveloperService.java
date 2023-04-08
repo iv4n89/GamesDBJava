@@ -21,7 +21,7 @@ public class DeveloperService implements IDeveloperService {
     }
 
     @Override
-    public Developer getOneDeveloper(int id) {
+    public Developer getOneDeveloper(long id) {
         return dao.findById(id).orElse(null);
     }
 
@@ -31,7 +31,7 @@ public class DeveloperService implements IDeveloperService {
     }
 
     @Override
-    public Developer updateDeveloper(int id, Developer developer) {
+    public Developer updateDeveloper(long id, Developer developer) {
         Developer _developer = this.getOneDeveloper(id);
 
         if (_developer == null) {
@@ -49,7 +49,7 @@ public class DeveloperService implements IDeveloperService {
     }
 
     @Override
-    public void deleteDeveloper(int id) {
+    public void deleteDeveloper(long id) {
         dao.deleteById(id);
     }
     
