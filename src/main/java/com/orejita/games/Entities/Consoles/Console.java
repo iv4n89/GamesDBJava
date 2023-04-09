@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.orejita.games.Entities.Common.Category;
 import com.orejita.games.Entities.Common.Icon;
 import com.orejita.games.Entities.Common.Price;
+import com.orejita.games.Entities.Common.Tag;
 import com.orejita.games.Entities.Common.Zone;
 import com.orejita.games.Entities.Games.Game;
 import com.orejita.games.Entities.Manufacturer.Manufacturer;
@@ -68,6 +70,13 @@ public class Console {
     @ManyToOne
     @JoinColumn(name = "zone_id")
     private Zone zone;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToMany
+    private List<Tag> tags;
 
     public List<String> getImages() {
         if (this.images == null) {

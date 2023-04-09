@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.orejita.games.DTO.Common.CategoryDto;
 import com.orejita.games.DTO.Common.IconDto;
+import com.orejita.games.DTO.Common.TagDto;
 import com.orejita.games.DTO.Common.ZoneDto;
 import com.orejita.games.DTO.Requests.OnCreate;
 import com.orejita.games.DTO.Requests.OnUpdate;
@@ -58,6 +60,10 @@ public class ConsoleDto implements Serializable {
     private Integer isSpecialEdition;
 
     private ZoneDto zone;
+
+    private CategoryDto category;
+
+    private List<TagDto> tags;
 
     public void setZone(long id) {
         ZoneDto zone = new ZoneDto();

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.orejita.games.Entities.Common.Icon;
 import com.orejita.games.Entities.Common.Price;
+import com.orejita.games.Entities.Common.Tag;
 import com.orejita.games.Entities.Common.Zone;
 import com.orejita.games.Entities.Consoles.Console;
 import com.orejita.games.Entities.Manufacturer.Manufacturer;
@@ -79,6 +80,9 @@ public class Game {
 
     @OneToMany(mappedBy = "game")
     private List<UserGameStatic> userGameStatics;
+
+    @ManyToMany
+    private List<Tag> tags;
 
 
     public List<String> getImages() {

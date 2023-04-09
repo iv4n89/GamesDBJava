@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.orejita.games.DTO.Common.IconDto;
+import com.orejita.games.DTO.Common.TagDto;
 import com.orejita.games.DTO.Common.ZoneDto;
 import com.orejita.games.DTO.Consoles.ConsoleDto;
 import com.orejita.games.DTO.Requests.OnCreate;
@@ -52,6 +53,8 @@ public class GameDto implements Serializable {
     private Integer isSpecialEdition;
 
     private ZoneDto zone;
+
+    private List<TagDto> tags;
 
     public void setDeveloperId(DeveloperDto developer) {
         this.developerId = developer;
