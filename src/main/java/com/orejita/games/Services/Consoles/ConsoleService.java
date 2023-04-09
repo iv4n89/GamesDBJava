@@ -79,6 +79,12 @@ public class ConsoleService implements IConsoleService {
             _console.getBoxImages().addAll(console.getBoxImages());
             _console.setBoxImages(_console.getBoxImages().stream().collect(Collectors.toSet()).stream().toList());
         }
+        if (console.getIsSpecialEdition() != null) {
+            _console.setIsSpecialEdition(console.getIsSpecialEdition());
+        }
+        if (console.getZone() != null) {
+            _console.setZone(console.getZone());
+        }
 
         return dao.save(_console);
     }

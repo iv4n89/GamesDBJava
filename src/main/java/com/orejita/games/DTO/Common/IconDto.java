@@ -19,7 +19,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class IconDto {
 
-    private Integer id;
+    private Long id;
 
     @NotNull(groups = OnCreate.class)
     private String url;

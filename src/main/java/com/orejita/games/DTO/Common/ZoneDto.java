@@ -1,9 +1,5 @@
 package com.orejita.games.DTO.Common;
 
-import java.util.Date;
-
-import com.orejita.games.DTO.Consoles.ConsoleDto;
-import com.orejita.games.DTO.Games.GameDto;
 import com.orejita.games.DTO.Requests.OnCreate;
 
 import jakarta.validation.constraints.NotNull;
@@ -16,18 +12,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PriceDto {
-
+public class ZoneDto {
+    
     private Long id;
 
     @NotNull(groups = OnCreate.class)
-    private float price;
+    private String name;
 
-    @NotNull(groups = OnCreate.class)
-    private Date priceDate;
-
-    private ConsoleDto consoleHistoryPrice;
-
-    private GameDto gameHistoryPrice;
-    
 }

@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class ManufacturerDto {
     
-    private Integer id;
+    private Long id;
 
     @NotNull(groups = OnCreate.class)
     @Size(min = 2, max = 30, groups = { OnCreate.class, OnUpdate.class })

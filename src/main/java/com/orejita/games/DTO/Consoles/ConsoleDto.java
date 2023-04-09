@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import com.orejita.games.DTO.Common.IconDto;
+import com.orejita.games.DTO.Common.ZoneDto;
 import com.orejita.games.DTO.Requests.OnCreate;
 import com.orejita.games.DTO.Requests.OnUpdate;
+import com.orejita.games.Entities.Common.Zone;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -22,7 +24,7 @@ import lombok.Setter;
 public class ConsoleDto implements Serializable {
     
     
-    private Integer id;
+    private Long id;
 
     @NotNull(groups = OnCreate.class)
     @Size(max = 35, groups = { OnCreate.class, OnUpdate.class })
@@ -52,5 +54,19 @@ public class ConsoleDto implements Serializable {
     private List<String> images;
 
     private List<String> boxImages;
+
+    private Integer isSpecialEdition;
+
+    private ZoneDto zone;
+
+    public void setZone(long id) {
+        ZoneDto zone = new ZoneDto();
+        zone.setId(id);
+        this.zone = zone;
+    }
+
+    public void setZone(ZoneDto zone) {
+        this.zone = zone;
+    }
 
 }

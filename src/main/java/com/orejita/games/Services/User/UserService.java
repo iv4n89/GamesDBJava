@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.orejita.games.DAO.User.ICollectionDao;
 import com.orejita.games.DAO.User.IUserDao;
+import com.orejita.games.Entities.User.Collection;
 import com.orejita.games.Entities.User.User;
 import com.orejita.games.Services.Interfaces.IUserService;
 
@@ -14,6 +16,9 @@ public class UserService implements IUserService {
 
     @Autowired
     private IUserDao dao;
+
+    @Autowired
+    private ICollectionDao collectionDao;
 
     @Override
     public List<User> getAllUsers() {
@@ -32,7 +37,11 @@ public class UserService implements IUserService {
 
     @Override
     public User createUser(User user) {
-        return dao.save(user);
+        User _user = dao.save(user);
+        Collection collection = new Collection();
+        collection.setUser(_user);
+        collectionDao.save(collection);
+        return _user;
     }
 
     @Override

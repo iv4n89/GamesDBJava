@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.orejita.games.Entities.Common.Icon;
 import com.orejita.games.Entities.Common.Price;
+import com.orejita.games.Entities.Common.Zone;
 import com.orejita.games.Entities.Consoles.Console;
 import com.orejita.games.Entities.Manufacturer.Manufacturer;
 import com.orejita.games.Entities.User.Collection;
@@ -20,7 +21,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +31,7 @@ import lombok.Setter;
 public class Game {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String slug;
@@ -56,6 +57,12 @@ public class Game {
 
     private List<String> boxImages;
 
+    private Integer isSpecialEdition = 0;
+
+    @ManyToOne
+    @JoinColumn(name = "zone_id")
+    private Zone zone;
+
     @OneToOne(mappedBy = "gameIcon")
     private Icon icon;
 
@@ -72,6 +79,7 @@ public class Game {
 
     @OneToMany(mappedBy = "game")
     private List<UserGameStatic> userGameStatics;
+
 
     public List<String> getImages() {
         if (this.images == null) {

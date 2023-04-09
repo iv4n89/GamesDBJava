@@ -6,12 +6,14 @@ import java.util.List;
 
 import com.orejita.games.Entities.Common.Icon;
 import com.orejita.games.Entities.Common.Price;
+import com.orejita.games.Entities.Common.Zone;
 import com.orejita.games.Entities.Games.Game;
 import com.orejita.games.Entities.Manufacturer.Manufacturer;
 import com.orejita.games.Entities.User.Collection;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
@@ -29,6 +31,7 @@ import lombok.Setter;
 public class Console {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String slug;
@@ -59,6 +62,12 @@ public class Console {
 
     @ManyToMany
     private List<Collection> collections;
+
+    private Integer isSpecialEdition = 0;
+
+    @ManyToOne
+    @JoinColumn(name = "zone_id")
+    private Zone zone;
 
     public List<String> getImages() {
         if (this.images == null) {

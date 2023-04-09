@@ -27,6 +27,7 @@ import lombok.Setter;
 public class Collection {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne

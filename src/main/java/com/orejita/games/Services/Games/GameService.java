@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.orejita.games.DAO.Common.IIConDao;
 import com.orejita.games.DAO.Consoles.IConsoleDao;
 import com.orejita.games.DAO.Games.IGameDao;
+import com.orejita.games.Entities.Common.Icon;
 import com.orejita.games.Entities.Consoles.Console;
 import com.orejita.games.Entities.Games.Game;
 import com.orejita.games.Services.Interfaces.IGameService;
@@ -17,7 +19,11 @@ public class GameService implements IGameService {
     @Autowired
     private IGameDao dao;
 
-    @Autowired IConsoleDao consoleDao;
+    @Autowired 
+    private IConsoleDao consoleDao;
+
+    @Autowired
+    private IIConDao iconDao;
 
     @Override
     public List<Game> getAllGames() {
@@ -57,6 +63,17 @@ public class GameService implements IGameService {
             return null;
         }
 
+        game.setConsole(console);
+        if (game.getIsSpecialEdition() == null) {
+            game.setIsSpecialEdition(0);
+        }
+        if (game.getIcon() == null && game.getLogo() != null) {
+            Icon icon = new Icon();
+            icon.setUrl(game.getLogo());
+            Icon _icon = iconDao.save(icon);
+            game.setIcon(_icon);
+        }
+
         return dao.save(game);
     }
 
@@ -76,6 +93,12 @@ public class GameService implements IGameService {
         }
         if (game.getDescription() != null) {
             _game.setDescription(game.getDescription());
+        }
+        if (game.getIsSpecialEdition() != null) {
+            _game.setIsSpecialEdition(game.getIsSpecialEdition());
+        }
+        if (game.getZone() != null) {
+            _game.setZone(game.getZone());
         }
         
         return dao.save(_game);

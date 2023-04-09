@@ -6,6 +6,8 @@ import com.orejita.games.Entities.Consoles.Console;
 import com.orejita.games.Entities.Games.Game;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -26,6 +28,7 @@ import lombok.Setter;
 public class Price {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Float price;
 
