@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.orejita.games.Entities.Comment.Comment;
 import com.orejita.games.Entities.Common.Category;
 import com.orejita.games.Entities.Common.Icon;
 import com.orejita.games.Entities.Common.Price;
@@ -11,6 +12,7 @@ import com.orejita.games.Entities.Common.Tag;
 import com.orejita.games.Entities.Common.Zone;
 import com.orejita.games.Entities.Games.Game;
 import com.orejita.games.Entities.Manufacturer.Manufacturer;
+import com.orejita.games.Entities.Rating.Rating;
 import com.orejita.games.Entities.User.Collection;
 
 import jakarta.persistence.Entity;
@@ -77,6 +79,12 @@ public class Console {
 
     @ManyToMany
     private List<Tag> tags;
+
+    @OneToMany(mappedBy = "console")
+    private List<Rating> ratings;
+
+    @OneToMany(mappedBy = "console")
+    private List<Comment> comments;
 
     public List<String> getImages() {
         if (this.images == null) {

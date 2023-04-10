@@ -3,6 +3,9 @@ package com.orejita.games.Entities.User;
 import java.util.Date;
 import java.util.List;
 
+import com.orejita.games.Entities.Comment.Comment;
+import com.orejita.games.Entities.Rating.Rating;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,5 +42,11 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<UserGameStatic> gameStatic;
+
+    @OneToMany(mappedBy = "user")
+    private List<Rating> ratings;
+
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
     
 }

@@ -3,12 +3,14 @@ package com.orejita.games.Entities.Games;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.orejita.games.Entities.Comment.Comment;
 import com.orejita.games.Entities.Common.Icon;
 import com.orejita.games.Entities.Common.Price;
 import com.orejita.games.Entities.Common.Tag;
 import com.orejita.games.Entities.Common.Zone;
 import com.orejita.games.Entities.Consoles.Console;
 import com.orejita.games.Entities.Manufacturer.Manufacturer;
+import com.orejita.games.Entities.Rating.Rating;
 import com.orejita.games.Entities.User.Collection;
 import com.orejita.games.Entities.User.UserGameStatic;
 
@@ -83,6 +85,12 @@ public class Game {
 
     @ManyToMany
     private List<Tag> tags;
+
+    @OneToMany(mappedBy = "game")
+    private List<Rating> ratings;
+
+    @OneToMany(mappedBy = "game")
+    private List<Comment> comments;
 
 
     public List<String> getImages() {
