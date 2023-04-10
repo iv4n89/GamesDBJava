@@ -2,6 +2,7 @@ package com.orejita.games.Services.Common;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,6 +73,14 @@ public class CategoryService implements ICategoryService {
         consoles.add(console);
         category.setConsoles(consoles);
         return dao.save(category);
+    }
+
+    @Override
+    public Category deleteConsoleFromCategory(long id, long consoleId) {
+        Category category = this.getOneCategory(id);
+        Set<Console> consoles = category.getConsoles().stream().filter(console -> console.getId() != consoleId).collect(Collectors.toSet());
+        category.setConsoles(consoles);
+        return this.dao.save(category);
     }
 
     @Override

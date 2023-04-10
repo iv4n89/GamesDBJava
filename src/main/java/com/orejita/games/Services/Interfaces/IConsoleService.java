@@ -13,6 +13,8 @@ public interface IConsoleService {
     Console setConsoleImages(Console console, List<String> images);
     Console setConsoleBoxImages(long consoleId, List<String> boxImages);
     Console setConsoleBoxImages(Console console, List<String> boxImages);
+    Console addTagToConsole(long consoleId, long tagId);
+    Console deleteTagToConsole(long consoleId, long tagId);
     Console deleteConsoleImage(long consoleId, String fileName);
     Console deleteConsoleBoxImage(long consoleId, String fileName);
     void deleteConsole(long consoleId);

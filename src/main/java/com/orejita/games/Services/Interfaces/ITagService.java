@@ -17,6 +17,8 @@ public interface ITagService {
     Tag addConsolesToTag(long id, Set<Long> consoleIds);
     Tag addGameToTag(long id, long gameId);
     Tag addGamesToTag(long id, Set<Long> gamesId);
+    Tag deleteConsoleFromTag(long id, long consoleId);
+    Tag deleteGameFromTag(long id, long gameTag);
     void deleteTag(long id);
 
 }

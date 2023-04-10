@@ -118,6 +118,18 @@ public class TagController {
         return this.convertToDto(tag);
     }
 
+    @DeleteMapping("/{id}/console/{consoleId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteConsoleFromTag(@PathVariable("id") long id, @PathVariable("consoleId") long consoleId) {
+        this.service.deleteConsoleFromTag(id, consoleId);
+    }
+
+    @DeleteMapping("/{id}/game/{gameId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteGameFromTag(@PathVariable("id") long id, @PathVariable("gameId") long gameId) {
+        this.service.deleteGameFromTag(id, gameId);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTag(@PathVariable("id") long id) {

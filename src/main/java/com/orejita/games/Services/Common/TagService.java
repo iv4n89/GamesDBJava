@@ -16,6 +16,7 @@ import com.orejita.games.Entities.Consoles.Console;
 import com.orejita.games.Entities.Games.Game;
 import com.orejita.games.Exceptions.Console.ConsoleNotFoundException;
 import com.orejita.games.Exceptions.Game.GameNotFoundException;
+import com.orejita.games.Exceptions.Tag.TagNotFoundException;
 import com.orejita.games.Services.Interfaces.ITagService;
 
 @Service
@@ -119,6 +120,22 @@ public class TagService implements ITagService {
         List<Game> _tagGames = tagGames.stream().collect(Collectors.toSet()).stream().toList();
         tag.setGames(_tagGames);
         return dao.save(tag);
+    }
+
+    @Override
+    public Tag deleteConsoleFromTag(long id, long consoleId) {
+        Tag tag = this.getOneTag(id);
+        List<Console> consoles = tag.getConsoles().stream().filter(console -> console.getId() != consoleId).toList();
+        tag.setConsoles(consoles);
+        return this.dao.save(tag);
+    }
+
+    @Override
+    public Tag deleteGameFromTag(long id, long gameId) {
+        Tag tag = this.getOneTag(id);
+        List<Game> games = tag.getGames().stream().filter(game -> game.getId() != gameId).toList();
+        tag.setGames(games);
+        return this.dao.save(tag);
     }
 
     @Override

@@ -23,6 +23,8 @@ public interface IGameService {
     Game setGameBoxImages(Game game, List<String> images);
     Game deleteGameImage(long gameId, String image);
     Game deleteGameBoxImage(long gameId, String image);
+    Game addTagToGame(long gameId, long tagId);
+    Game deleteTagFromGame(long gameId, long tagId);
     void deleteGame(long id);
     
 }

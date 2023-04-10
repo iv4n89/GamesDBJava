@@ -6,10 +6,15 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.orejita.games.DAO.Common.ICategoryDao;
+import com.orejita.games.DAO.Common.ITagDao;
 import com.orejita.games.DAO.Consoles.IConsoleDao;
 import com.orejita.games.DAO.Manufacturer.IManufacturerDao;
+import com.orejita.games.Entities.Common.Category;
+import com.orejita.games.Entities.Common.Tag;
 import com.orejita.games.Entities.Consoles.Console;
 import com.orejita.games.Entities.Manufacturer.Manufacturer;
+import com.orejita.games.Exceptions.Tag.TagNotFoundException;
 import com.orejita.games.Services.Interfaces.IConsoleService;
 
 @Service
@@ -20,6 +25,9 @@ public class ConsoleService implements IConsoleService {
 
     @Autowired
     private IManufacturerDao manufacturerDao;
+
+    @Autowired
+    private ITagDao tagDao;
 
     @Override
     public List<Console> getAllConsoles() {
@@ -85,6 +93,9 @@ public class ConsoleService implements IConsoleService {
         if (console.getZone() != null) {
             _console.setZone(console.getZone());
         }
+        if (console.getCategory() != null) {
+            _console.setCategory(console.getCategory());
+        }
 
         return dao.save(_console);
     }
@@ -130,6 +141,28 @@ public class ConsoleService implements IConsoleService {
         console.setBoxImages(images);
         return dao.save(console);
     }
+
+    @Override
+    public Console addTagToConsole(long consoleId, long tagId) {
+        Console console = this.getOneConsole(consoleId);
+        Tag tag = this.tagDao.findById(tagId).orElseThrow(() -> new TagNotFoundException("Tag not found"));
+        List<Tag> consoleTags = console.getTags();
+        consoleTags.add(tag);
+        List<Tag> _consoleTags = consoleTags.stream().collect(Collectors.toSet()).stream().toList();
+        console.setTags(_consoleTags);
+        return dao.save(console);
+    }
+
+    @Override
+    public Console deleteTagToConsole(long consoleId, long tagId) {
+        Console console = this.getOneConsole(consoleId);
+        List<Tag> consoleTags = console.getTags();
+        List<Tag> _consoleTags = consoleTags.stream().filter(tag -> tag.getId() != tagId).toList();
+        console.setTags(_consoleTags);
+        return dao.save(console);
+    }
+
+
 
     @Override
     public void deleteConsole(long consoleId) {

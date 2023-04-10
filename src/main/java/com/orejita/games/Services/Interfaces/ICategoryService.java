@@ -13,6 +13,7 @@ public interface ICategoryService {
     Category updateCategory(long id, Category category);
     Category addConsoleToCategory(long id, long consoleId);
     Category addConsoleToCategory(long id, Console console);
+    Category deleteConsoleFromCategory(long id, long consoleId);
     void deleteCategory(long id);
 
 }
