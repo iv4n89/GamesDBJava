@@ -22,25 +22,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.orejita.games.Controllers.BaseController;
 import com.orejita.games.DTO.Games.GameDto;
 import com.orejita.games.DTO.Requests.OnCreate;
 import com.orejita.games.DTO.Requests.OnUpdate;
 import com.orejita.games.Entities.Games.Game;
 import com.orejita.games.Services.Interfaces.IGameService;
 
-@Controller
+@RestController
 @RequestMapping("/game")
 @Validated
-public class GameController {
+public class GameController extends BaseController<Game, GameDto> {
     
     @Autowired
     private IGameService service;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
     @GetMapping
-    @ResponseBody
     public List<GameDto> getAllGames() {
         List<Game> games = service.getAllGames();
         return games.stream()
@@ -49,7 +46,6 @@ public class GameController {
     }
 
     @GetMapping("/console/{id}")
-    @ResponseBody
     public List<GameDto> getAllConsoleGames(@PathVariable("id") long id) {
         List<Game> games = service.getAllGamesByConsole(id);
         return games.stream()
@@ -58,7 +54,6 @@ public class GameController {
     } 
 
     @GetMapping("/manufacturer/{id}")
-    @ResponseBody
     public List<GameDto> getAllManufacturerGames(@PathVariable("id") long id) {
         List<Game> games = service.getAllGamesByManufacturer(id);
         return games.stream()
@@ -67,28 +62,24 @@ public class GameController {
     }
 
     @GetMapping("/{id}")
-    @ResponseBody
     public GameDto getGame(@PathVariable("id") long id) {
         Game game = service.getOneGame(id);
         return convertToDto(game);
     }
 
     @GetMapping("/name/{name}")
-    @ResponseBody
     public GameDto getGameByName(@PathVariable("name") String name) {
         Game game = service.getGameByName(name);
         return convertToDto(game);
     }
 
     @GetMapping("/slug/{slug}")
-    @ResponseBody
     public GameDto getGameBySlug(@PathVariable("slug") String slug) {
         Game game = service.getGameBySlug(slug);
         return convertToDto(game);
     }
 
     @PostMapping("/console/{consoleId}")
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public GameDto createGame(@Validated(OnCreate.class) @RequestBody GameDto game, @PathVariable("consoleId") long consoleId) throws ParseException {
         Game gameEntity = convertToEntity(game);
@@ -97,7 +88,6 @@ public class GameController {
     }
 
     @PutMapping("/{id}")
-    @ResponseBody
     public GameDto updateGame(@PathVariable("id") long id, @Validated(OnUpdate.class) @RequestBody Game game) {
         Game _game = service.updateGame(id, game);
         return convertToDto(_game);
@@ -107,16 +97,6 @@ public class GameController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteGame(@PathVariable("id") long id) {
         service.deleteGame(id);
-    }
-
-    private GameDto convertToDto(Game game) {
-        GameDto gameDto = modelMapper.map(game, GameDto.class);
-        return gameDto;
-    }
-
-    private Game convertToEntity(GameDto gameDto) throws ParseException {
-        Game game = modelMapper.map(gameDto, Game.class);
-        return game;
     }
 
 }

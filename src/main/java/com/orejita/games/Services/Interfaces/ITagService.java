@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Set;
 
 import com.orejita.games.Entities.Common.Tag;
+import com.orejita.games.Services.IService;
 
-public interface ITagService {
+public interface ITagService extends IService<Tag> {
 
     List<Tag> getAllTags();
     List<Tag> getAllConsoleTags(long consoleId);

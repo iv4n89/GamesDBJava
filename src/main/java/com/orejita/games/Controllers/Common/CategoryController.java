@@ -16,26 +16,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.orejita.games.Controllers.BaseController;
 import com.orejita.games.DTO.Common.CategoryDto;
 import com.orejita.games.DTO.Requests.OnCreate;
 import com.orejita.games.DTO.Requests.OnUpdate;
 import com.orejita.games.Entities.Common.Category;
 import com.orejita.games.Services.Interfaces.ICategoryService;
 
-@Controller
+@RestController
 @Validated
 @RequestMapping("/category")
-public class CategoryController {
-    
-    @Autowired
-    private ICategoryService service;
+public class CategoryController extends BaseController<Category, CategoryDto> {
 
     @Autowired
-    private ModelMapper modelMapper;
+    protected ICategoryService service;
 
     @GetMapping
-    @ResponseBody
     public List<CategoryDto> getAllCategories() {
         List<Category> categories = this.service.getAllCategories();
         return categories.stream()
@@ -44,14 +42,12 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    @ResponseBody
     public CategoryDto getOneCategory(@PathVariable("id") long id) {
         Category category = this.service.getOneCategory(id);
         return convertToDto(category);
     }
 
     @PostMapping
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public CategoryDto createCategory(@Validated(OnCreate.class) @RequestBody CategoryDto category) {
         Category entity = convertToEntity(category);
@@ -60,7 +56,6 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    @ResponseBody
     public CategoryDto updateCategory(@PathVariable("id") long id,
             @Validated(OnUpdate.class) @RequestBody CategoryDto category) {
         Category entity = convertToEntity(category);
@@ -69,7 +64,6 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}/console/{consoleId}")
-    @ResponseBody
     public CategoryDto addConsoleToCategory(@PathVariable("id") long id, @PathVariable("consoleId") long consoleId) {
         Category category = this.service.addConsoleToCategory(id, consoleId);
         return convertToDto(category);
@@ -79,17 +73,6 @@ public class CategoryController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCategory(@PathVariable("id") long id) {
         this.service.deleteCategory(id);
-    }
-
-
-    private CategoryDto convertToDto(Category category) {
-        CategoryDto dto = this.modelMapper.map(category, CategoryDto.class);
-        return dto;
-    }
-
-    private Category convertToEntity(CategoryDto dto) {
-        Category category = this.modelMapper.map(dto, Category.class);
-        return category;
     }
 
 }

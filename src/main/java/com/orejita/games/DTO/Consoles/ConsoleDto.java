@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.orejita.games.DTO.Common.CategoryDto;
 import com.orejita.games.DTO.Common.IconDto;
 import com.orejita.games.DTO.Common.TagDto;
 import com.orejita.games.DTO.Common.ZoneDto;
+import com.orejita.games.DTO.Manufacturers.ManufacturerDto;
 import com.orejita.games.DTO.Requests.OnCreate;
 import com.orejita.games.DTO.Requests.OnUpdate;
 import com.orejita.games.Entities.Common.Zone;
@@ -24,7 +27,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConsoleDto implements Serializable {
-    
     
     private Long id;
 
@@ -59,20 +61,21 @@ public class ConsoleDto implements Serializable {
 
     private Integer isSpecialEdition;
 
+    private ManufacturerDto manufacturer;
+
+    private Long manufacturerId;
+
     private ZoneDto zone;
+
+    private Long zoneId;
 
     private CategoryDto category;
 
     private List<TagDto> tags;
 
-    public void setZone(long id) {
-        ZoneDto zone = new ZoneDto();
-        zone.setId(id);
-        this.zone = zone;
-    }
-
-    public void setZone(ZoneDto zone) {
-        this.zone = zone;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    public Long getZoneId() {
+        return this.zoneId;
     }
 
 }

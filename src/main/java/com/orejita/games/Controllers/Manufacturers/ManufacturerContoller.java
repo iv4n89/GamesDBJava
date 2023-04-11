@@ -18,26 +18,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.orejita.games.Controllers.BaseController;
 import com.orejita.games.DTO.Manufacturers.ManufacturerDto;
 import com.orejita.games.DTO.Requests.OnCreate;
 import com.orejita.games.DTO.Requests.OnUpdate;
 import com.orejita.games.Entities.Manufacturer.Manufacturer;
 import com.orejita.games.Services.Interfaces.IManufacturerService;
 
-@Controller
+@RestController
 @RequestMapping("/manufacturer")
 @Validated
-public class ManufacturerContoller {
+public class ManufacturerContoller extends BaseController<Manufacturer, ManufacturerDto> {
     
     @Autowired
     private IManufacturerService service;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
     @GetMapping
-    @ResponseBody
     public List<ManufacturerDto> getAllManufacturers() {
         List<Manufacturer> manufacturers = service.getAllManufacturers();
         return manufacturers.stream()
@@ -46,14 +44,12 @@ public class ManufacturerContoller {
     }
 
     @GetMapping("/{id}")
-    @ResponseBody
     public ManufacturerDto getManufacturer(@PathVariable("id") long id) {
         Manufacturer manufacturer = service.getOneManufacturer(id);
         return convertToDto(manufacturer);
     }
 
     @PostMapping
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public ManufacturerDto createManufacturer(@Validated(OnCreate.class) @RequestBody ManufacturerDto manufacturer) {
         Manufacturer manufacturerEntity = convertToEntity(manufacturer);
@@ -62,7 +58,6 @@ public class ManufacturerContoller {
     }
 
     @PutMapping("/{id}")
-    @ResponseBody
     public ManufacturerDto updateManufacturer(@PathVariable("id") long id, @Validated(OnUpdate.class) @RequestBody ManufacturerDto manufacturer) {
         Manufacturer manufacturerEntity = convertToEntity(manufacturer);
         Manufacturer _manufacturer = service.updateManufacturer(id, manufacturerEntity);
@@ -73,16 +68,6 @@ public class ManufacturerContoller {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteManufacturer(@PathVariable("id") long id) {
         service.deleteManufacturer(id);
-    }
-
-    private ManufacturerDto convertToDto(Manufacturer manufacturer) {
-        ManufacturerDto dto = this.modelMapper.map(manufacturer, ManufacturerDto.class);
-        return dto;
-    }
-
-    private Manufacturer convertToEntity(ManufacturerDto dto) {
-        Manufacturer manufacturer = this.modelMapper.map(dto, Manufacturer.class);
-        return manufacturer;
     }
 
 }

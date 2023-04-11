@@ -2,6 +2,7 @@ package com.orejita.games.DTO.Comment;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.orejita.games.DTO.Consoles.ConsoleDto;
 import com.orejita.games.DTO.Games.GameDto;
 import com.orejita.games.DTO.Requests.OnCreate;
@@ -39,8 +40,14 @@ public class CommentDto {
 
     private ConsoleDto console;
 
+    private Long consoleId;
+
     private GameDto game;
 
+    private Long gameId;
+
     private UserDto user;
+
+    private Long userId;
 
 }

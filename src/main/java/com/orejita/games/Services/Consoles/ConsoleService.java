@@ -4,16 +4,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.orejita.games.DAO.Common.ICategoryDao;
 import com.orejita.games.DAO.Common.ITagDao;
+import com.orejita.games.DAO.Common.IZoneDao;
 import com.orejita.games.DAO.Consoles.IConsoleDao;
 import com.orejita.games.DAO.Manufacturer.IManufacturerDao;
+import com.orejita.games.DTO.Consoles.ConsoleDto;
 import com.orejita.games.Entities.Common.Category;
 import com.orejita.games.Entities.Common.Tag;
+import com.orejita.games.Entities.Common.Zone;
 import com.orejita.games.Entities.Consoles.Console;
 import com.orejita.games.Entities.Manufacturer.Manufacturer;
+import com.orejita.games.Exceptions.API.ApiException;
 import com.orejita.games.Exceptions.Tag.TagNotFoundException;
 import com.orejita.games.Services.Interfaces.IConsoleService;
 
@@ -28,6 +33,16 @@ public class ConsoleService implements IConsoleService {
 
     @Autowired
     private ITagDao tagDao;
+
+    @Autowired
+    private IZoneDao zoneDao;
+
+    @Autowired
+    private ICategoryDao categoryDao;
+
+    private final String ZONE_NOT_FOUND = "Zone not found";
+    private final String MANUFACTURER_NOT_FOUND = "Manufacturer not found";
+    private final String MANUFACTURER_IS_NEEDED = "Manufacturer is needed";
 
     @Override
     public List<Console> getAllConsoles() {
@@ -45,6 +60,23 @@ public class ConsoleService implements IConsoleService {
 
         if (manufacturer != null) {
             console.setManufacturer(manufacturer);
+        }
+        if (console.getIsSpecialEdition() == null) {
+            console.setIsSpecialEdition(0);
+        }
+        
+        return dao.save(console);
+    }
+
+    @Override
+    public Console createConsole(long manufacturerId, long zoneId, Console console) {
+        Manufacturer manufacturer = manufacturerDao.findById(manufacturerId).orElseThrow(() -> new ApiException(ZONE_NOT_FOUND, HttpStatus.BAD_REQUEST));
+        Zone zone = zoneDao.findById(zoneId).orElseThrow(() -> new ApiException(ZONE_NOT_FOUND, HttpStatus.BAD_REQUEST));
+
+        console.setManufacturer(manufacturer);
+        console.setZone(zone);
+        if (console.getIsSpecialEdition() == null) {
+            console.setIsSpecialEdition(0);
         }
         
         return dao.save(console);

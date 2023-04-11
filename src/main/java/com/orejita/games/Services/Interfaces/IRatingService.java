@@ -3,8 +3,9 @@ package com.orejita.games.Services.Interfaces;
 import java.util.List;
 
 import com.orejita.games.Entities.Rating.Rating;
+import com.orejita.games.Services.IService;
 
-public interface IRatingService {
+public interface IRatingService extends IService<Rating> {
 
     List<Rating> getAllRatings();
     List<Rating> getAllRatingByConsoleId(long consoleId);

@@ -15,26 +15,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.orejita.games.Controllers.BaseController;
 import com.orejita.games.DTO.Common.ZoneDto;
 import com.orejita.games.DTO.Requests.OnCreate;
 import com.orejita.games.DTO.Requests.OnUpdate;
 import com.orejita.games.Entities.Common.Zone;
 import com.orejita.games.Services.Interfaces.IZoneService;
 
-@Controller
+@RestController
 @Validated
 @RequestMapping("/zone")
-public class ZoneController {
+public class ZoneController extends BaseController<Zone, ZoneDto> {
     
     @Autowired
     private IZoneService service;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
     @GetMapping
-    @ResponseBody
     public List<ZoneDto> getAllZones() {
         List<Zone> zones = service.getAllZones();
         return zones.stream()
@@ -43,14 +41,12 @@ public class ZoneController {
     }
 
     @GetMapping("/{id}")
-    @ResponseBody
     public ZoneDto getZone(@PathVariable("id") long id) {
         Zone zone = service.getOneZone(id);
         return convertToDto(zone);
     }
 
     @PostMapping
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public ZoneDto createZone(@Validated(OnCreate.class) @RequestBody ZoneDto zone) {
         Zone zoneEntity = convertToEntity(zone);
@@ -59,7 +55,6 @@ public class ZoneController {
     }
 
     @PostMapping("/{id}")
-    @ResponseBody
     public ZoneDto updateZone(@PathVariable("id") long id, @Validated(OnUpdate.class) @RequestBody ZoneDto zone) {
         Zone zoneEntity = convertToEntity(zone);
         Zone _zone = service.updateZone(id, zoneEntity);
@@ -70,17 +65,6 @@ public class ZoneController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteZone(@PathVariable("id") long id) {
         service.deleteZone(id);
-    }
-
-
-    private ZoneDto convertToDto(Zone zone) {
-        ZoneDto dto = this.modelMapper.map(zone, ZoneDto.class);
-        return dto;
-    }
-
-    private Zone convertToEntity(ZoneDto dto) {
-        Zone model = this.modelMapper.map(dto, Zone.class);
-        return model;
     }
 
 }

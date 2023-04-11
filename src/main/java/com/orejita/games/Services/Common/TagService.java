@@ -16,7 +16,6 @@ import com.orejita.games.Entities.Consoles.Console;
 import com.orejita.games.Entities.Games.Game;
 import com.orejita.games.Exceptions.Console.ConsoleNotFoundException;
 import com.orejita.games.Exceptions.Game.GameNotFoundException;
-import com.orejita.games.Exceptions.Tag.TagNotFoundException;
 import com.orejita.games.Services.Interfaces.ITagService;
 
 @Service
@@ -38,12 +37,12 @@ public class TagService implements ITagService {
 
     @Override
     public List<Tag> getAllConsoleTags(long consoleId) {
-        return dao.findAllByConsoleId(consoleId).orElse(null);
+        return null;
     }
 
     @Override
     public List<Tag> getAllGameTags(long gameId) {
-        return dao.findAllByGameId(gameId).orElse(null);
+        return null;
     }
 
     @Override

@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Set;
 
 import com.orejita.games.Entities.Common.Zone;
+import com.orejita.games.Services.IService;
 
-public interface IZoneService {
+public interface IZoneService extends IService<Zone> {
     
     List<Zone> getAllZones();
     Zone getOneZone(long id);

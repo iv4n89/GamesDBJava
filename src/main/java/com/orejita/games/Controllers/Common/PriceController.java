@@ -17,26 +17,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.orejita.games.Controllers.BaseController;
 import com.orejita.games.DTO.Common.PriceDto;
 import com.orejita.games.DTO.Requests.OnCreate;
 import com.orejita.games.DTO.Requests.OnUpdate;
 import com.orejita.games.Entities.Common.Price;
 import com.orejita.games.Services.Interfaces.IPriceService;
 
-@Controller
+@RestController
 @Validated
 @RequestMapping("/price")
-public class PriceController {
+public class PriceController extends BaseController<Price, PriceDto> {
 
     @Autowired
     private IPriceService service;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
     @GetMapping("/console/all/{id}")
-    @ResponseBody
     public List<PriceDto> getAllConsolePrices(@PathVariable("id") int id) {
         List<Price> prices = service.getAllPricesByConsole(id);
         return prices.stream()
@@ -45,7 +43,6 @@ public class PriceController {
     }
 
     @GetMapping("/game/all/{id}")
-    @ResponseBody
     public List<PriceDto> getAllGamePrices(@PathVariable("id") int id) {
         List<Price> prices = service.getAllPricesByGame(id);
         return prices.stream()
@@ -54,28 +51,24 @@ public class PriceController {
     }
 
     @GetMapping("/{id}")
-    @ResponseBody
     public PriceDto getOnePrice(@PathVariable("id") int id) {
         Price price = service.getOnePrice(id);
         return convertToDto(price);
     }
 
     @GetMapping("/last/console/{id}")
-    @ResponseBody
     public PriceDto getLastConsolePrice(@PathVariable("id") long id) {
         Price price = service.getLastConsolePrice(id);
         return convertToDto(price);
     }
 
     @GetMapping("/last/game/{id}")
-    @ResponseBody
     public PriceDto getLastGamePrice(@PathVariable("id") long id) {
         Price price = service.getLastGamePrice(id);
         return convertToDto(price);
     }
 
     @PostMapping("/console/{id}")
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public PriceDto createConsolePrice(@PathVariable("id") long id, @Validated(OnCreate.class) @RequestBody PriceDto price) {
         Price priceEntity = convertToEntity(price);
@@ -84,7 +77,6 @@ public class PriceController {
     }
 
     @PostMapping("/game/{id}")
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public PriceDto createGamePrice(@PathVariable("id") long id, @Validated(OnCreate.class) @RequestBody PriceDto price) {
         Price priceEntity = convertToEntity(price);
@@ -93,7 +85,6 @@ public class PriceController {
     }
 
     @PutMapping("/{id}")
-    @ResponseBody
     public PriceDto updatePrice(@PathVariable("id") long id, @Validated(OnUpdate.class) @RequestBody PriceDto price) {
         Price priceEntity = convertToEntity(price);
         Price _price = service.updatePrice(id, priceEntity);
@@ -104,17 +95,6 @@ public class PriceController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePrice(@PathVariable("id") long id) {
         service.deletePrice(id);
-    }
-
-
-    private PriceDto convertToDto(Price price) {
-        PriceDto dto = this.modelMapper.map(price, PriceDto.class);
-        return dto;
-    }
-
-    private Price convertToEntity(PriceDto dto) {
-        Price price = this.modelMapper.map(dto, Price.class);
-        return price;
     }
     
 }

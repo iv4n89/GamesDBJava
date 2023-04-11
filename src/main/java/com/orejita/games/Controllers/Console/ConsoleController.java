@@ -4,11 +4,8 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,30 +14,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.orejita.games.Controllers.BaseController;
 import com.orejita.games.DTO.Consoles.ConsoleDto;
 import com.orejita.games.DTO.Requests.OnCreate;
 import com.orejita.games.DTO.Requests.OnUpdate;
 import com.orejita.games.Entities.Consoles.Console;
-import com.orejita.games.Entities.Manufacturer.Manufacturer;
 import com.orejita.games.Services.Interfaces.IConsoleService;
-import com.orejita.games.Services.Interfaces.IManufacturerService;
 
-@Controller
+@RestController
 @RequestMapping("/console")
 @Validated
-public class ConsoleController {
+public class ConsoleController extends BaseController<Console, ConsoleDto> {
     
     @Autowired
     private IConsoleService service;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
     @GetMapping
-    @ResponseBody
     public List<ConsoleDto> getAllConsoles() {
         List<Console> consoles = service.getAllConsoles();
         return consoles.stream()
@@ -49,23 +41,27 @@ public class ConsoleController {
     }
 
     @GetMapping("/{id}")
-    @ResponseBody
     public ConsoleDto getConsole(@PathVariable("id") long id) {
         Console console = service.getOneConsole(id);
         return convertToDto(console);
     }
 
     @PostMapping("/manufacturer/{manId}")
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public ConsoleDto createConsole(@Validated(OnCreate.class) @RequestBody ConsoleDto console, @PathVariable("manId") long manId) throws ParseException {
         Console consoleEntity = convertToEntity(console);
+        
+        if (console.getZoneId() != null) {
+            Long zoneId = console.getZoneId();
+            Console _console = service.createConsole(manId, zoneId, consoleEntity);
+            return convertToDto(_console);
+        }
+
         Console _console = service.createConsole(manId, consoleEntity);
         return convertToDto(_console);
     }
 
     @PutMapping("/{id}")
-    @ResponseBody
     public ConsoleDto updateConsole(@PathVariable("id") long id, @Validated(OnUpdate.class)  @RequestBody ConsoleDto console) throws ParseException {
         Console consoleEntity = convertToEntity(console);
         Console _console = service.updateConsole(consoleEntity, id);
@@ -76,17 +72,6 @@ public class ConsoleController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteConsole(@PathVariable("id") long id) {
         service.deleteConsole(id);
-    }
-
-    private ConsoleDto convertToDto(Console console) {
-        ConsoleDto consoleDto = modelMapper.map(console, ConsoleDto.class);
-        return consoleDto;
-    }
-
-    private Console convertToEntity(ConsoleDto consoleDto) throws ParseException {
-        Console console = modelMapper.map(consoleDto, Console.class);
-
-        return console;
     }
 
 }

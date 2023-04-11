@@ -2,8 +2,9 @@ package com.orejita.games.Services.Interfaces;
 
 import java.util.List;
 import com.orejita.games.Entities.Games.Publisher;
+import com.orejita.games.Services.IService;
 
-public interface IPublisherService {
+public interface IPublisherService extends IService<Publisher> {
 
     List<Publisher> getAllPublishers();
 

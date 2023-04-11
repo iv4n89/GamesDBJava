@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.orejita.games.Entities.Common.Category;
 import com.orejita.games.Entities.Consoles.Console;
+import com.orejita.games.Services.IService;
 
-public interface ICategoryService {
+public interface ICategoryService extends IService<Category> {
     
     List<Category> getAllCategories();
     Category getOneCategory(long id);

@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.orejita.games.Entities.Games.Game;
+import com.orejita.games.Services.IService;
 
 @Service
-public interface IGameService {
+public interface IGameService extends IService<Game> {
 
     List<Game> getAllGames();
     List<Game> getAllGamesByConsole(long consoleId);

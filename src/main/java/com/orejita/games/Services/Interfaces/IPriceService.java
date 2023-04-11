@@ -3,8 +3,9 @@ package com.orejita.games.Services.Interfaces;
 import java.util.List;
 
 import com.orejita.games.Entities.Common.Price;
+import com.orejita.games.Services.IService;
 
-public interface IPriceService {
+public interface IPriceService extends IService<Price> {
 
     List<Price> getAllPricesByConsole(long consoleId);
     List<Price> getAllPricesByGame(long gameId);
