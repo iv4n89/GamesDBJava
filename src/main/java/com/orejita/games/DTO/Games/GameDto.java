@@ -3,6 +3,7 @@ package com.orejita.games.DTO.Games;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.orejita.games.DTO.Common.IconDto;
 import com.orejita.games.DTO.Common.TagDto;
 import com.orejita.games.DTO.Common.ZoneDto;
@@ -34,13 +35,17 @@ public class GameDto implements Serializable {
     @Size(min = 1, max = 10, groups = { OnCreate.class, OnUpdate.class })
     private String slug;
 
-    @NotNull(groups = OnCreate.class)
-    private DeveloperDto developerId;
+    private DeveloperDto developer;
+
+    private Long developerId;
     
-    @NotNull(groups = OnCreate.class)
-    private PublisherDto publisherId;
+    private PublisherDto publisher;
+
+    private Long publisherId;
 
     private ConsoleDto console;
+
+    private Long consoleId;
 
     private IconDto icon;
 
@@ -57,23 +62,23 @@ public class GameDto implements Serializable {
     private List<TagDto> tags;
 
     public void setDeveloperId(DeveloperDto developer) {
-        this.developerId = developer;
+        this.developer = developer;
     }
 
     public void setDeveloperId(long id) {
         DeveloperDto developer = new DeveloperDto();
         developer.setId(id);
-        this.developerId = developer;
+        this.developer = developer;
     }
 
     public void setPublisherId(PublisherDto publisher) {
-        this.publisherId = publisher;
+        this.publisher = publisher;
     }
 
     public void setPublisherId(long id) {
         PublisherDto publisher = new PublisherDto();
         publisher.setId(id);
-        this.publisherId = publisher;
+        this.publisher = publisher;
     }
 
     public void setZone(long id) {
@@ -84,6 +89,21 @@ public class GameDto implements Serializable {
 
     public void setZone(ZoneDto zone) {
         this.zone = zone;
+    }
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    public Long getDeveloperId() {
+        return this.developerId;
+    }
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    public Long getPublisherId() {
+        return this.publisherId;
+    }
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    public Long getConsoleId() {
+        return this.consoleId;
     }
     
 }

@@ -1,7 +1,9 @@
 package com.orejita.games.DTO.Common;
 
 import java.util.Date;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.orejita.games.DTO.Consoles.ConsoleDto;
 import com.orejita.games.DTO.Games.GameDto;
 import com.orejita.games.DTO.Requests.OnCreate;
@@ -23,11 +25,22 @@ public class PriceDto {
     @NotNull(groups = OnCreate.class)
     private float price;
 
-    @NotNull(groups = OnCreate.class)
-    private Date priceDate;
+    private List<ConsoleDto> consoles;
 
-    private ConsoleDto consoleHistoryPrice;
+    private Long consoleId;
 
-    private GameDto gameHistoryPrice;
+    private List<GameDto> games;
+
+    private Long gameId;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    public Long getConsoleId() {
+        return this.consoleId;
+    }
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    public Long getGameId() {
+        return this.gameId;
+    }
     
 }

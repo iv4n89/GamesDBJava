@@ -48,11 +48,8 @@ public class Console {
     private List<String> images;
     private List<String> boxImages;
 
-    @OneToOne(mappedBy = "consoleInitialPrice")
-    private Price initialPrice;
-
-    @OneToMany(mappedBy = "consoleHistoryPrice")
-    private List<Price> hitoryPrice;
+    @ManyToMany
+    private List<Price> prices;
 
     @OneToOne(mappedBy = "consoleIcon")
     private Icon icon;

@@ -48,11 +48,8 @@ public class Game {
     @JoinColumn(name = "console_id")
     private Console console;
 
-    @OneToOne(mappedBy = "gameInitialPrice")
-    private Price initialPrice;
-
-    @OneToMany(mappedBy = "gameHistoryPrice")
-    private List<Price> historyPrices;
+    @ManyToMany
+    private List<Price> prices;
 
     private String logo;
 
@@ -71,11 +68,11 @@ public class Game {
 
     @ManyToOne
     @JoinColumn(name = "developer_id")
-    private Developer developerId;
+    private Developer developer;
 
     @ManyToOne
     @JoinColumn(name = "publisher_id")
-    private Publisher publisherId;
+    private Publisher publisher;
 
     @ManyToMany
     private List<Collection> collections;
