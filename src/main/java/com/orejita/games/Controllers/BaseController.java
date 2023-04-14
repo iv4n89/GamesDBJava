@@ -5,15 +5,10 @@ import java.lang.reflect.ParameterizedType;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.orejita.games.Services.IService;
-
 public abstract class BaseController<T, D> {
 
     @Autowired
     protected ModelMapper modelMapper;
-
-    @Autowired
-    protected IService<T> service;
 
     protected D convertToDto(T entity) {
         D dto = modelMapper.map(entity, getDtoClass());
